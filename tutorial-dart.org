@@ -1,0 +1,673 @@
+#+title: resumen-dart
+#+author: Patricio Martínez
+#+email: maxxcan@disroot.org
+
+* Prefacio 
+
+Este tutorial sobre dart es una traducción más o menos literal de la página [[https://www.tutorialspoint.com/dart_programming/dart_programming_syntax.htm][tutorialspoint]]. 
+
+* Introducción 
+
+Dart es un lenguaje open-source de propósito general. Originalmente desarrollado por Google y más tarde aprovado como un estándar por ECMA. Dart es un nuevo lenguaje de programación destinado para servidores así como para navegadores. Introducido por Google, el *Dart SDK* viene con su compilador - el *Dart VM*. El SDK también incluye una utilidad *dart2js*, un transpilador que general código Javascript equivalente de un script de Dart. 
+
+
+* Clases 
+
+Dart es un lenguaje orientado a objetos. Soporta características de programación orientada a objetos como clases, interfaces, etc. Una clase en terminos de OOP es un plano para crear objetos. Una clase encapsula datos para el objeto. Dart ofrece soporte para este concepto llamado *clase*. 
+
+** Declarando una clase 
+
+Se usa la palabra clave *class* para declarar un clase. Una definición de clase empieza con la palabra clave class seguido de un *nombre de clase*; y el cuerpo encerrado por un par de llaves. La sintaxis es la siguiente: 
+
+#+BEGIN_SRC 
+Syntax 
+
+class class_name {
+<campos>
+<getters/setters>
+<constructores>
+<funciones>
+}
+#+END_SRC
+
+La palabra clave *class* es seguida por el nombre de la clase. Las reglas para los identificadores deben ser consideradas también para los nombres de clases.
+
+Un definición de clase puede incluir lo siguiente: 
+
+- *Campos* - Un campo es cualquier variable declarada en una clase. Los campos representan datos pertenecientes a lo objetos.
+- *Setters y Getters* - Permiten al programa iniciar y recibir valores de los campos de una clase. Un getter/setter por defecto es asociado con cada clase. Sin embargo, éste puede ser anulado definiendo explícitamente un setter/getter.
+- *Constructores* - Responsables de asignar memoria para el objeto de la clase. 
+- *Funciones* - Las funciones representan las acciones que un objeto puede tomar. También son referidas como *métodos*.
+
+Esos componentes puestos juntos son denominados como los datos de los miembros de la clase. 
+
+Ejemplo:
+
+#+BEGIN_SRC dart 
+  class Car {
+    // campo
+    String engine = "E1001";
+
+    // función
+    void disp() {
+      print(engine);
+    }
+  }
+#+END_SRC
+
+En el ejemplo declaramos una clase llamada *Car*. La clase tiene un campo llamado *engine*. Y una simple función *disp()* que escribe el valor del campo *engine*.
+
+** Creando una instancia de la clase 
+
+Para crear una instancia de la clase, usamos la palabra clave *new* seguido del nombre de la clase. La sintaxis es la siguiente:
+
+#+BEGIN_SRC 
+Syntax
+
+var nombre_del_objeto = new nombre_clase([ argumentos ])
+#+END_SRC
+
++ La palabra clave *new* es responsable de la instanciación. 
++ El lado derecho de la expresión invoca al constructor. El constructor puede pasar valores si son parametrizados.
+
+/Ejemplo de una instancia de clase/
+
+#+BEGIN_SRC dart
+  var obj = new Car("Engine 1")
+#+END_SRC
+
+** Accediendo a Atributos y Funciones
+
+Los atributos y funciones de una clase pueden ser accedidos a través del objeto. Usando la *notación de punto* (llamado *periodo*) para acceder a los miembros de los datos de una clase.
+
+#+BEGIN_SRC dart
+//accediendo a un atributo
+obj.nombre_del_campo
+
+//accediendo a una función
+obj.nombre_de_la_función()
+#+END_SRC
+
+/Ejemplo/
+
+Echemos un ojo al siguiente ejemplo para entender como acceder a los atributos y funciones en Dart
+
+#+BEGIN_SRC dart
+  void main(){
+    Car c= new Car();
+    c.disp();
+  }
+  class Car {
+    // campo
+    String engine = "E1001";
+
+    //función
+    void disp() {
+      print(engine);
+    }
+  }
+#+END_SRC
+
+La salida del código anterior es el siguiente - 
+
+: E1001
+
+** Constructores en Dart
+
+Un constructor es una función especial de la clase que es la responsable de inicializar las variables de la clase. Dart define un constructor con el mismo nombre de la clase. Un constructor es una función y por lo tanto puede ser parametrizada. Sin embargo, a diferencia de una función, los constructores no pueden tener un tipo de retorno. Si no se declara un constructor, un constructor sin argumentos por defecto es proporcionado por tí. 
+
+/Sintáxis/
+
+#+BEGIN_SRC 
+Nombre_de_la_Clase(lista_de_parámetros){
+//cuerpo del constructor
+}
+#+END_SRC
+
+El siguiente ejemplo muestra como se usa un constructor en Dart. 
+
+#+BEGIN_SRC dart
+  void main(){
+    Car c = new Car('E1001');
+  }
+  class Car {
+    Car(String engine) {
+      print(engine);
+    }
+  }
+
+#+END_SRC
+
+Esto dará la siguiente salida - 
+
+: E1001
+
+** Constructores nombrados (Named Constructor)
+
+Dart proporciona *named constructor* para habilitar una definición de clase con múltiples constructores. La sintaxis es la siguiente- 
+
+/Sintáxis: Definiendo el constructor/
+
+#+BEGIN_SRC 
+Nombre_clase.nombre_constructor(lista_de_parámetros)
+#+END_SRC
+
+Ejemplo:
+
+#+BEGIN_SRC dart
+  void main() {
+    Car c1 = new Car.namedConst('E1001');
+    Car c2 = new Car();
+  }
+  class Car {
+    Car(){
+      print("Constructor sin parámetros invocado");
+    }
+    Car.namedConst(String engine) {
+      print("El motor es : ${engine}");
+    }
+  }
+#+END_SRC
+
+Esto producirá la siguiente salida:
+
+: El motor es: E1001
+: Constructor sin parámetros invocado
+
+** La palabra clave /this/
+
+La palabra clave *this* se refiere a la instancia actual de la clase. Aquí, el parámetro llamado y el nombre del campo de la clase son el mismo. Por lo tanto para evitar la ambigüedad, el campo de la clase se le pone el prefijo *this*. El siguiente ejemplo explica ésto.
+
+/Ejemplo/
+
+El siguiente ejemplo explica como usar la palabra clave *this* en Dart
+
+#+BEGIN_SRC dart
+  void main(){
+    Car c1 = new Car('E1001');
+  }
+  class Car {
+    String engine;
+    Car(String engine){
+      this.engine = engine;
+      print("El motor es : ${engine}")
+    }
+  }
+#+END_SRC
+
+Esto dará como resultado:
+
+: El motor es : E1001
+
+** Getters and setters
+
+Getters and Setters, también llamados accesores (accessors) y mutadores (mutators), permiten al programa inicializar y recibir los valores de los campos de las clases respectivamente. Getters o accesores son definidos usando la palabra clave get. Los Setters o mutadores son definidos usando la palabra clave set.
+
+Un setter/getter por defecto es asociado a cada clase. Sin embargo, pueden ser invalidados definiendolos explícitamente. Un getter no tiene parámetros y devuelve un valor, y un setter tiene un parámetro y no devuelve ningún valor. 
+
+/Sintáxis: Definiendo un getter/
+
+#+BEGIN_SRC 
+Return type get identificador
+{
+}
+#+END_SRC
+
+/Sintáxis: Definiendo un setter/ 
+
+#+BEGIN_SRC 
+set identificador 
+{
+}
+#+END_SRC
+
+/Ejemplo/
+
+El siguiente ejemplo muestra como usar getters y setters en Dart - 
+
+#+BEGIN_SRC dart
+  class Student{
+    String name;
+    int age;
+
+    String get stud_name {
+      return name;
+    }
+    void set stud_name(String name){
+      this.name = name;
+    }
+
+    void set stud_age(int age){
+      if(age<= 0){
+        print("La edad debe ser mayor que 5");
+      } else {
+        this.age = age;
+      }
+    }
+
+    int get stud_age {
+      return age;
+    }
+  }
+
+  void main() {
+    Student s1 = new Student();
+    s1.stud_name = 'Pedro';
+    s1.stud_age = 0;
+    print(s1.stud_name);
+    print(s1.stud_age);
+  }
+#+END_SRC
+
+Este programa producirá la siguiente salida 
+
+: La edad debe ser mayor que 5
+: Pedro
+: Null
+
+** Herencia de clase
+
+Dart soporta el concepto de herencia el cual es la habilidad de un programa  de crear una nueva clase de una clase existente. La clase que es extendida para crear nuevas clases es llamada clase padre o superclase. La clase nueva creada es llamada la clase hija o subclase. 
+
+Una clase hereda de otra clase usando la palabra clave 'extends'. Las clases hijas heredan todas las propiedades y métodos, excepto el constructor de la clase padre. 
+
+/Sintáxis/
+
+: class nombre_clase_hija extends nombre_clase_hija
+
+*Nota*. Dart no soporta la herencia múltiple. 
+
+/Ejemplo de herencia de clase/
+
+En el siguiente ejemplo, vamos a declarar una clase Forma. La clase es extendida por la clase Círculo. 
+
+#+BEGIN_SRC dart
+
+  void main(){
+    var obj  new Circle();
+    obj.cal_area();
+  }
+
+  Class Shape {
+    void cal_area(){
+      print("llamando al cálculo de area definido en la clase Forma");
+    }
+  }
+  class Circle extends Shape {}
+
+#+END_SRC
+
+Esto produce la siguiente salida - 
+
+: llamando al cáluclo de area definido en la clase Forma
+
+*** Tipos de Herencia 
+
+La herencia puede seguir tres tipos - 
+
+1) *Simple* - Cada clase puede al menos extender de una clase padre
+2) *Múltiple* - Una clase puede heredar de múltiples clases. Dart no soporta la herencia múltiple
+3) *Multi-level* - Una clase puede heredar de otra clase hija. 
+
+El siguiente ejemplo muestra como funciona la herencial Multi-level. 
+
+#+BEGIN_SRC dart
+  void main(){
+  var obj = new Leaf();
+  obj.str = "hola";
+  print(obj.str);
+  }
+  Class Raíz {
+  String str;
+  }
+  class Hijo extends Raíz {}
+  class Hoja extends Hijo {}
+  // indirectamente hereda de Raíz por virtud de la herencia
+#+END_SRC
+
+La clase Hoja deriva sus atributos de las clases Raíz e Hijo por virtud de la herencia multi-level. La salida será - 
+
+: hola
+
+** Herencia de clase y anulación de métodos
+
+La anulación de Métodos es un mecanismo por el cual la clase hija redefine un método en la clase padre. El siguiente ejemplo ilustra esto -
+
+#+BEGIN_SRC dart
+  void main(){
+    Hijo h = new Hijo();
+    h.m1(12);
+  }
+  Class Padre {} {
+    void m1(int a) { print ("El valor de a ${a}");}
+  }
+  class Hijo extends Parent {
+    @override
+    void m1(int b){
+      print("el valor de b ${b}");
+    }
+  }
+#+END_SRC
+
+La salida será: 
+
+: el valor de b 12
+
+** La palabra clave /static/
+
+La palabra clave *static* puede ser aplicada a los miembros de datos de una clase, es decir, *campos y métodos*. Una variable estática retiene su valor hasta que el programa termina la ejecución. Los miembros estáticos son referenciados por un nombre de clase. 
+
+/Ejemplo/
+
+#+BEGIN_SRC dart
+  class MemoriaStatica {
+    static int num;
+    static disp() {
+      print("El valor de num es ${MemoriaStatica.num}");
+    }
+  }
+  void main() {
+    MemoriaStatica.num = 12;
+    // Inicializamos la variable estática}
+    MemoriaStatica.disp();
+    // invocamos el  método estático
+  }
+#+END_SRC
+
+Esto producirá la siguiente salida - 
+
+: El valor de num es 12
+
+** La palabra clave /super/
+
+La palabra clave *super* es usada para referirse a la clase padre inmediata. La palabra clave puede ser usada para referirse a la versión de una *variable, propiedad o método* de una superclase. El siguiente ejemplo ilustra esto - 
+
+/Ejemplo/
+
+#+BEGIN_SRC dart
+  void main(){
+    Hijo h = new Hijo();
+    h.m1(12);
+  }
+  class Padre {
+    String msg = "variable mensaje desde la clase padre";
+    void m1(int a){ print("valor de a ${a}");}
+  }
+  class Hijo extends Padre {
+    @override
+    void m1(int b) {
+      print("valor de b ${b}");
+      super.m1(13);
+      print("${super.msg}");
+    }
+  }
+#+END_SRC
+
+
+La salida que se producirá será la siguiente - 
+
+: valor de b 12
+: valor de a 13
+: variable mensaje desde la clase padre
+
+* Objetos 
+
+Una programación orientada a objetos define un objeto como "cualquier entidad que tiene un límite definido". Un objeto tiene lo siguiente - 
+
++ *Estado* - Describe el objeto. El campo de una clase representa el estado del objeto 
++ *Comportamiento* - Describe lo que el objeto puede hacer 
++ *Identidad* - Un valor único que distingue un objeto de un conjunto de otros objetos similares. Dos o más objetos puede compartir el estado y el comportamiento pero no la identidad. 
+
+El operador punto *(.)* es usado en conjunción con el objeto para acceder a los miembros datos de una clase. 
+
+*Ejemplo*
+
+Dart representa datos en la forma de objetos. Cada clase en Dart extiende la clase Objeto. Veremos en el siguiente ejemplo como crear y usar un objeto. 
+
+#+BEGIN_SRC dart
+  class Estudiante {
+    void metodo_prueba() {
+      print("Esto es un método de prueba");
+    }
+    void metodo_prueba1(){
+      print("Esto es un método de prueba1");
+    }
+  }
+  void main() {
+    Estudiante e1 = new Estudiante();
+    e1.metodo_prueba();
+    e1.metodo_prueba1();
+  }
+#+END_SRC
+
+La salida que producirá será - 
+
+: Esto es un método de prueba
+: Esto es un método de prueba1
+
+** El operador Cascada (..)
+
+En el ejemplo anterior hemos invocado el método en la clase. Sin embargo, cada vez que una función es llamada, una referencia al objeto es requerida. El *operador cascada* puede ser usado como un atajo en casos donde hay una secuencia de invocaciones. 
+
+El operador cascada (..) puede ser usado para facilitar una secuencia de llamada vía un objeto. El ejemplo anterior puede ser reescrito de la siguiente manera. 
+
+#+BEGIN_SRC dart
+  class Estudiante {
+    void metodo_prueba(){
+      print("Esto es un método de prueba");
+    }
+
+    void metodo_prueba1(){
+      print("Esto es un método de prueba");
+    }
+  }
+  void main(){
+    new Estudiante()
+    ..metodo_prueba()
+    ..metodo_prueba1();
+  }
+#+END_SRC
+
+Esto producirá la siguiente salida 
+
+: Esto es un método de prueba
+: Esto es un método de prueba1
+
+** El método /toString()/
+
+Esta función devuelve una cadena de texto representación de un objeto. Veamos el siguiente ejemplo para entender como se usa el método *toString*
+
+#+BEGIN_SRC dart
+  void main() {
+    int n = 12;
+    print(n.toString());
+  }
+#+END_SRC
+
+Esto dará como resultado -- 
+
+: 12
+
+* Colecciones 
+
+Dart, a diferencia de otros lenguajes de programación, no soporta arrays. Las colecciones en Dart pueden ser usadas para replicar estructuras de datos como un array. La librería Dart:core y otras clases habilitan el soporte de Colecciones en los guiones de Dart. 
+
+Las colecciones de Dart pueden ser basicamente clasificadas como - 
+
+| Sr.No | Colecciones Dart | Descripción                                                                                                         |
+|-------+------------------+---------------------------------------------------------------------------------------------------------------------|
+|     1 | Lista            | Una lista es un simple grupo de objetos ordenados. Tenemos *Listas de longitud fija* y *Listas ampliables*          |
+|     2 | Conjuntos        | Representan un colección de objetos cuyo objeto solo puede aparecer una vez.                                        |
+|     3 | Mapas            | Es un para palabra/valor. Las palabras y valores pueden ser de cualquier tipo y son dinámicos, pueden ser ampliados |
+|     4 | Cola             | Es una colección que puede ser manipulada en ambos finales. Los elementos se eliminan en el orden de su inserción  |
+
+
+** Iterando colecciones 
+
+La clase /Iterator/ de la biblioteca *dart:core* habilita la fácil colección transversal. Cada colección tiene una propiedad iterada. Esta propiedad devuelve un iterador que apunta al objeto en la colección. 
+
+/Ejemplo/
+
+El siguiente ejemplo ilustra atravesar una colección usando un objeto iterador.
+
+#+BEGIN_SRC dart
+  import 'dart:collection';
+  void main() {
+    Queue numC = new Queue();
+    numC.addAll([100,200,300]);
+    Iterator i= numC.iterator;
+
+    while(i.moveNext()){
+      print(i.current);
+    }
+  }
+#+END_SRC
+
+La función *moveNext()* devuelve un valor buleano indicado donde hay una subsecuencia. La propiedad *current* del objeto iterador devuelve el valor del objeto  al que el iterador apunta. 
+
+Este programa producirá la siguiente salida - 
+
+: 100 
+: 200
+: 300
+
+* Genéricos
+
+Dart es un *lenguaje tipado opcional*. Las colecciones en Dart son heterogéneas por defecto. En otras palabras, una simple colección en Dar puede hospedar valores de varios tipos. Sin embargo, una colección en Dart puede ser hecha manteniendo los valores homogéneos. El concepto de Genéricos puede ser usado para guardar lo mismo. 
+
+El uso de Genéricos fuerza a una restricción en los tipos de datos de los valores que puede ser contenido en la colección. Tales colecciones son llamadas colecciones de tipo salvado. El tipo salvado es una característica que asegura que un bloque de memoria puede solamente contener datos de un tipo especificado. 
+
+Todas las colecciones en Dart soportan esto vía genéricos. Un par corchetes angulares conteniendo el tipo de dato es usado para declarar una colección de tipo salvado. La sintaxis para declarar una colección de este tipo se ve a continuación. 
+
+/Sintaxis/
+
+: Nombre_colección <tipo_de_dato> identificador= new Nombre_colección<tipo_de_dato> 
+
+La implementación tipo-salvado de una Lista, Mapa, Conjunto y Colas es dado a continuación. Esta característica es también soportada por todas las implementaciones de los tipos antes mencionados. 
+
+/Ejemplo: Lista Genérica/
+
+#+BEGIN_SRC dart
+  void main(){
+    List <String> logTypes = new List <String>();
+    logTypes.add("ALERTA");
+    logTypes.add("ERROR");
+    logTypes.add("INFORMACIÓN");
+
+    // iterando a través de la lista
+    for (String type in logTypes){
+      print(type);
+    }
+  }
+#+END_SRC
+
+Esto producirá la siguiente *Salida*
+
+: ALERTA
+: ERROR
+: INFORMACIÓN
+
+
+Un intento de insertar otro tipo de dato dará como resultado un error de compilación. El siguiente ejemplo ilustra esto.
+
+/Ejemplo/
+
+#+BEGIN_SRC dart
+  void main() { 
+    List <String> logTypes = new List <String>(); 
+    logTypes.add(1); 
+    logTypes.add("ERROR"); 
+    logTypes.add("INFO"); 
+
+    //iterating across list 
+    for (String type in logTypes) { 
+      print(type); 
+    } 
+  } 
+#+END_SRC
+
+La salida será la siguiente 
+
+#+BEGIN_SRC
+
+Error: The argument type 'int' can't be assigned to the parameter type 'String'.
+Try changing the type of the parameter, or casting the argument to 'String'.
+  logTypes.add(1);
+
+#+END_SRC
+
+/Ejemplo: Conjunto/
+
+#+BEGIN_SRC dart
+  void main(){
+    Set <int>numberSet = new Set<int>();
+    numberSet.add(100);
+    numberSet.add(20);
+    numberSet.add(5);
+    numberSet.add(60);
+    numberSet.add(70);
+
+    for(var no in numberSet) {
+      print(no)
+    }
+  }
+#+END_SRC
+
+La salida será. 
+
+: 100
+: 20
+: 5
+: 60
+: 70
+
+/Ejemplo de cola/
+
+#+BEGIN_SRC dart
+  import 'dart:collection';
+  void main(){
+    Queue<int> cola = new Queue<int>();
+    print("Implementación por defecto ${cola.runtimeType}");
+    cola.addLast(10);
+    cola.addLast(20);
+    cola.addLast(30);
+    cola.addLast(40);
+    queue.removeFirst();
+
+    for(int no in cola){
+      print(no);
+    }
+  }
+#+END_SRC
+
+La *Salida* será:
+
+: Implementación por defecto ListQueue<int>
+: 20
+: 30
+: 40
+
+** Mapa genérico
+
+Para declarar un mapa con tipos de datos específicos - 
+
++ La clave
++ El valor 
+
+/Sintaxis/
+
+: Map <tipo_de_clave, tipo_de_valor>
+
+/Ejemplo/
+
+#+BEGIN_SRC dart
+    void main(){
+      Map <String,String>m={'nombre':'Pedro','Id':'E1001'};
+      print('Mapa :${m}');
+    }
+#+END_SRC
+
+Esto dará como resultado lo siguiente
+
+: Mapa :{nombre: Pedro, Id: E1001}
+
