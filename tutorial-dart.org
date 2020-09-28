@@ -8,7 +8,187 @@ Este tutorial sobre dart es una traducción más o menos literal de la página [
 
 * Introducción 
 
-Dart es un lenguaje open-source de propósito general. Originalmente desarrollado por Google y más tarde aprovado como un estándar por ECMA. Dart es un nuevo lenguaje de programación destinado para servidores así como para navegadores. Introducido por Google, el *Dart SDK* viene con su compilador - el *Dart VM*. El SDK también incluye una utilidad *dart2js*, un transpilador que general código Javascript equivalente de un script de Dart. 
+Dart es un lenguaje open-source de propósito general. Originalmente desarrollado por Google y más tarde aprovado como un estándar por ECMA. Dart es un nuevo lenguaje de programación destinado para servidores así como para navegadores. Introducido por Google, el *Dart SDK* viene con su compilador - el *Dart VM*. El SDK también incluye una utilidad *dart2js*, un transpilador que general código JavaScript equivalente de un script de Dart. 
+
+* Resumen 
+
+Dart es un lenguaje orientado a objetos con sintaxis de estilo C el cual puede opcionalmente trans compilar en JavaScript. Soporta una variedad de rangos de ayudas a la programación como interfaces, clases, colecciones, genéricos, y tipos opcionales. 
+
+Dart puede ser extensivamente usado para crear aplicaciones de una sola página. Las aplicaciones de una sola página aplicadas a sitios web y aplicaciones web. Las aplicaciones de una sola página tienen navegación entre diferentes pantallas del sitio web sin cargar una página diferente en el navegador. Un ejemplo clásico es *GMail* - cuando pinchamos en un mensaje de nuestra entrada de correo, el navegador permanece en la misma página, pero el código de JavaScript esconde la entrada de correo y trae el cuerpo del mensaje a la pantalla. 
+
+Google ha desarrollado una construcción especial de *Chromium* - el *Dart VM*. Usando Dartium significa que no tenemos que compilar nuestro código a JavaScript antes de que estemos preparados para testearlo en otros navegadores. 
+
+La siguiente tabla compara las características de Dart y JavaScript. 
+
+| Característica   | Dart                     | JavaScript        |
+|------------------+--------------------------+-------------------|
+| Sistema de tipos | Opcional, dinámico       | Débil, dinámico   |
+| Clases           | Sí, herencia simple      | Prototípica       |
+| Interfaces       | Sí, múltiples interfaces | No                |
+| Concurrencia     | S, con aislamiento       | Si, con HTML5 web |
+
+* Entorno
+
+* Sintaxis 
+
+La sintaxis define un conjunto de reglas para escribir programas. Cada especificación del lenguaje define su propia sintaxis. Un programa de Dart está compuesto de - 
+
++ Variables y operadores
++ Clases 
++ Funciones
++ Expresiones y constructores de programación
++ Toma de decisiones y constructores de bucles 
++ Comentarios
++ Bibliotecas y paquetes
++ Definiciones de tipos
++ Estructuras de datos representadas como colecciones / genéricos 
+
+** Nuestro primer Código en Dart
+
+Vamos a empezar con el tradicional ejemplo "Hola Mundo" - 
+
+#+BEGIN_SRC dart
+main(){
+  print("Hola Mundo");
+}
+#+END_SRC
+
+
+La función *main()* es un método predefinido en Dart. Este método actúa como el punto de entrada a la aplicación. Un guión de Dart necesita el método *main()* para la ejecución. *print()* es una función predefinida que dibuja una cadena de caracteres especificada o un valor a la salida estándar, es decir, la terminal. 
+
+La salida del código anterior será - 
+
+: Hola Mundo!
+
+** Ejecutando un programa de Dart
+
+Podemos ejecutar un programa de Dart de dos formas - 
+
++ Vía la terminal
+
++ Vía el IDE WebStorm 
+
+*** Vía la terminal 
+
+Para ejecutar un programa de Dart vía la terminal - 
+
++ Navegar hasta la ruta del proyecto actual
+
++ Escribir el siguiente comando en la ventana de la terminal 
+
+: dart nombre_fichero.dart 
+
+** Opciones de la línea de comandos en Dart 
+
+Las opciones de la línea de comandos en Dart son usadas para modificar la ejecución del guión de Dart. Las opciones más comunes son: 
+
+| Nº | Opciones         | Descripción                                                                                      |
+|----+------------------+--------------------------------------------------------------------------------------------------|
+|  1 | --version        | Muestra la versión del VM                                                                        |
+|  2 | --packages<ruta> | Especifica la ruta al fichero de configuracion de la resolución del paquete                      |
+|  3 | -p<ruta>         | Especifica donde encontar la biblioteca importada. Esta opción no puede ser usada con --packages |
+|  4 | -h o --help      | Muestra la ayuda                                                                                 |
+
+
+** Identificadores en Dart 
+
+Los identificadores son nombres dados a los elementos en un programa como variables, funciones, etc. Las reglas para los identificadores son - 
+
+Los identificadores pueden incluir ambos, caracteres y dígitos. Sin embargo, los identificadores no pueden empezar con un dígito. 
+
++ Los identificadores no pueden incluir símbolos especiales excepto el guión bajo (_) o el signo del dolar ($).
++ Los identificadores no pueden ser palabras clave
++ Los identificadores deben ser únicos.
++ Los identificadores son sensibles a mayúsculas y minúsculas.
++ Los identificadores no pueden contener espacios.
+
+La siguiente tala lista unos ejemplos de identificadores válidos e inválidos - 
+
+| Identificadores válidos | Identificadores inválidos |
+|-------------------------+---------------------------|
+| firstName               | Var                       |
+| first_name              | first name                |
+| num1                    | first-name                |
+| $result                 | 1number                   |
+
+** Palabras claves en Dart 
+
+Las palabras claves tienen un significado especial en el contexto del lenguaje. La siguiente tabla lista algunas palabras clave en Dart 
+
+| abstract1 | continue  | false      | new       | this     |
+| as1       | default   | final      | null      | throw    |
+| assert    | deferred1 | finally    | operator1 | true     |
+| async2    | do        | for        | part1     | try      |
+| async*2   | dynamic1  | get1       | rethrow   | typedef1 |
+| await2    | else      | if         | return    | var      |
+| break     | enum      | implemnts1 | set1      | void     |
+| case      | export1   | import1    | static1   | while    |
+| catch     | external1 | in         | super     | with     |
+| class     | extends   | is         | switch    | yield2   |
+| const     | factory1  | library1   | sync*2    | yield*2  |
+
+** Espacios en blanco y saltos de línea 
+
+Dart ignora los espacios, tabuladores, y saltos de carro que aparecen en el programa. Podemos usar espacios, tabuladores, y saltos de carro libremente en nuestro programa y somos libres de sangrar los programas en una forma limpia y consistente para hacer el código más fácil de leer y entender. 
+
+** Dart es sensible a mayúsculas y minúsculas 
+
+Dart es sensible a mayúsculas y minúsculas. Esto significa que Dart diferencia entre caractéres en mayúsculas y minúsculas. 
+
+** Las declaraciones terminan con un punto y coma 
+
+Cada línea de una instrucción es llamada una declaración. Cada declaración en dart debe terminar con un punto y coma(;). Un simple línea puede contener múltiples declaraciones. Sin embargo, esas declaraciones deben estar separadas por un punto y coma. 
+
+** Comentarios en Dart 
+
+Los comentarios son una forma de mejorar la legibilidad de un programa. Los comentarios pueden ser usados para incluir información adicional sobre un programa como el autor del código, pistas sobre una función/constructor etc. Los comentarios son ignorados por el compilador. 
+
+Dart soporta los siguientes tipos de comentarios. 
+
++ Comentarios de una sola línea (//) - Cualquier texto entre un "//" y el final de una línea es tratado como un comentario 
++ Comentarios multilínea. (/**/)- Esos comentarios pueden tener múltiples líneas. 
+
+Ejemplo 
+
+#+BEGIN_SRC dart 
+// esto es un comentario de una línea 
+
+/* Esto es un 
+comentario multilínea
+*/
+#+END_SRC
+
+** Programación orientada a objetos en Dart 
+
+Dart es un lenguaje orientado a objetos. La orientación a objetos es un paradigma del desarrollo de software que sigue un modelo del mundo real. La orientación a objetos considera un programa como una colección de objetos que se comunican unos con otros con un mecanismo llamado método. 
+
++ *Objeto*  - Un objeto es una representación en tiempo real de cualquier entidad. Como por Grady Brooch, cada objeto debe tener tres características. 
+  + *Estado* -- descrito por los atributos de un objeto. 
+  + *Comportamiento* -- describe como el objeto actuará. 
+  + *Identidad* -- Un valor único que distingue un objeto de un conjunto de objetos similares. 
++ *Clase* -- Una clase en terminos del POO es un plano para crear objetos. Una clase encapsula datos para el objeto. 
++ *Método* -- Los métodos facilitan la comunicación entre objetos. 
+
+Ejemplo: Dart y la Orientación a Objetos 
+
+#+BEGIN_SRC dart 
+class TestClass{
+void disp(){
+print("Hello World";
+}
+}
+void main(){
+TestClass c = new TestClass();
+c.disp();
+}
+#+END_SRC
+
+En el ejemplo anterior definimos una clase *TestClass*. La clase tiene un método *disp()*. El método dibuja la cadena de texto "Hello World" en el terminal. La palabra clave *new* crea un objeto de la clase. El objeto invoca el método *disp()*. 
+
+El código producirá la siguiente salida - 
+
+: Hello World
+
 
 
 * Clases 
@@ -667,7 +847,7 @@ Para declarar un mapa con tipos de datos específicos -
     }
 #+END_SRC
 
+
 Esto dará como resultado lo siguiente
 
 : Mapa :{nombre: Pedro, Id: E1001}
-
