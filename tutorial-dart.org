@@ -189,6 +189,170 @@ El código producirá la siguiente salida -
 
 : Hello World
 
+* Tipos de datos 
+
+Una de las características más fundamentales de un lenguaje de programación es el conjunto de tipos de datos que soporta. Son los tipos de valores que pueden ser representados y manipulados en un lenguaje de programación. 
+
+Dart soporta los siguientes tipos: 
+
++ Números
++ Cadenas de caracteres 
++ Buleanos 
++ Listas
++ Mapas
+
+** Números 
+
+Los números en Dart son usados para representar números literales. Los números en dat vienen en dos tipos - 
+
++ *Enteros* - Valores enteros representan valores no fraccionales, es decir, valores numéricos sin punto decimal. Por ejemplo, el valor de "10" es un entero. Los enteros son representados usando la palabra clave *int*. 
++ *Dobles* - Dart También soporta valores numéricos fracionales, es decir, valores con punto decimal. El tipo de dato doble representa un número de 64-bit (doble-precisión) de coma flotante. Por ejemplo, el valor "10.10". La palabra clave *double* es usada para representar estos números. 
+
+** Cadenas de texto 
+
+Las cadenas de texto representan una cadena de caracteres. Por ejemplo, si necesitamos guardar algún tipo de dato como nombre, dirección, etc, el tipo de dato tipo cadena de texto suele ser usado. Una cadena de texto en Dart es una secuencia de unidades de código UTF-16. *Runas* son usadas para representar una secuencia de unidades de código UTF-32. 
+
+La palabra clave *String* es usada para representar cadenas de texto. Las cadenas de texo son embebidas entre comillas dobles o simples. 
+
+** Booleanos 
+
+Los tipos de datos booleanos representan valores de tipo lógico verdadero o falso. Dart usa la palabra clave *bool* para representar un valor Booleano. 
+
+** Listas y Mapas 
+
+Los tipos de datos listas y mapas son usados para representar una colección de objetos. Una *Lista* es un grupo ordenado de objetos. El tipo de dato Lista en Dart es sinónimo del concepto de array en otros lenguajes. El tipo de dato *Mapa* representa un conjunto de valores como pares clave-valor. La biblioteca *dart:core* habilita la creación y manipulación de esas colecciones a través de las clases predefinidas List y Map, respectivamente. 
+
+** El tipo dinámico 
+
+Dart es un lenguaje opcionalmente de tipado dinámico. Si el tipo de una variable no se especifica, el tipo de la variable es *dinámico*. La palabra clave *dynamic* es también usada como un tipo de anotación explícito. 
+
+
+* Variables 
+
+Una variable es "un espacio de memoria nombrado" que guarda valores. En otras palabras, actúa como un contenedor para los valores de un programa. Los nombres de las variables son llamados identificadores. A continuación mostramos las reglas de nombrado para un identificador - 
+
++ Los identificadores no pueden ser palabras clave
++ Los identificadores pueden contener letras y números 
++ Los identificadores no pueden contener espacios o caracteres especiales, excepto el guión bajo (_) y el signo del dolar ($). 
++ Los nombres de variables no pueden empezar con un número.
+
+** Sintaxis tipo 
+
+Una variable debe ser declarada antes de ser usada. Dart usa la palabra clave *var* para archivar el mismo. La sintaxis para declarar una variable es la siguiente - 
+
+#+BEGIN_SRC dart 
+var name = 'Smith';
+#+END_SRC
+
+Todas las variables en dart guardan una referencia al valor en vez de contener el valor. La variable llamada "name" contiene una referencia a un objeto cadena de caracteres con un valor de "Smith". 
+
+%% dibujo 
+
+Dart soporta *comprobador de tipos* por prefijando el nombre de la variable con el tipo de dato. El comprobador de tipos asegura que una variable guarda solo el dato espeificado como un tipo de dato. La sintaxis para el mismo es dado a continuación - 
+
+#+BEGIN_SRC dart 
+String name = 'Smith';
+int num = 10;
+#+END_SRC
+
+Consideremos el siguiente ejemplo - 
+
+#+BEGIN_SRC dart 
+void main(){
+String name = 1;
+}
+#+END_SRC
+
+El código anterior dará como resultado un aviso error que avisa que el valor asignado a la variable no coincide con el tipo de dato de la variable. 
+
+Salida. 
+
+: Error: A value of type 'int' can't be assigned to a variable of type 'String'.
+:  String name = 1;
+
+Todas las variables no inicializadas tienen el valor inicial de null. Esto es porque Dart considera todos los valores como objetos. El siguiente ejemplo lo ilustra. 
+
+#+BEGIN_SRC dart 
+void main(){
+int num;
+print(num);
+}
+#+END_SRC
+
+Salida 
+: null
+
+***  La palabra clave dynamic 
+
+Las variables declaradas sin un tipo estático son implícitamente declaradas como dinámicas. Las variables también pueden ser declaradas usando la palabra clave *dynamic* en lugar de la palabra clave *var*. 
+
+Veamos el siguiente ejemplo - 
+
+#+BEGIN_SRC dart 
+void main(){
+dynamic x = "tom";
+print(x);
+}
+#+END_SRC
+
+Salida 
+: tom 
+
+** Final y Const 
+
+Las palabras clave *final* y *const* son usadas para declarar constantes. Dart impide modificar los valores de una variable declarada usando las palabras clave final o const. Esas palabras clave pueden ser usadas en conjunción con el tipo de dato de la variable o en vez de la palabra clave *var*. 
+
+La palabra clave *const* es usada para representar una constante en tiempo de compilación. Las variables declaradas usando la palabra clave *const* son implicitamente final. 
+
+*** Sintaxis: final 
+: final nombre_variable
+
+o 
+
+: final tipo_de_dato nombre_variable
+
+*** Sintaxis: const 
+
+: const nombre_variable
+
+o 
+
+: const tipo_de_dato nombre_variable
+
+*** Ejemplo - final 
+
+#+BEGIN_SRC dart 
+void main(){
+final vall = 12;
+print(vall);
+}
+#+END_SRC
+
+#+RESULTS:
+: 12
+
+*** Ejemplo - const 
+
+#+BEGIN_SRC dart 
+void main(){
+const pi = 3.14;
+const area = pi*12*12;
+print("La salida es el ${area}");
+}
+#+END_SRC
+
+El ejemplo anterior declara dos constantes. 
+
+Sólo las variables *const* puede ser usadas para calcular una constante en tiempo de compilación. 
+
+* Operadores 
+
+Una expresión es un tipo especial de declaración que evalúa a un valor. Cada expresión está compuesto por - 
+
++ *Operandos* - Representan los datos 
++ *Operador* - Define como los operandos serán procesados para producir un valor. 
+
+
 
 
 * Clases 
