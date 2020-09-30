@@ -258,9 +258,9 @@ int num = 10;
 Consideremos el siguiente ejemplo - 
 
 #+BEGIN_SRC dart 
-void main(){
-String name = 1;
-}
+  void main(){
+    String name = 1;
+  }
 #+END_SRC
 
 El código anterior dará como resultado un aviso error que avisa que el valor asignado a la variable no coincide con el tipo de dato de la variable. 
@@ -273,10 +273,10 @@ Salida.
 Todas las variables no inicializadas tienen el valor inicial de null. Esto es porque Dart considera todos los valores como objetos. El siguiente ejemplo lo ilustra. 
 
 #+BEGIN_SRC dart 
-void main(){
-int num;
-print(num);
-}
+  void main(){
+    int num;
+    print(num);
+  }
 #+END_SRC
 
 Salida 
@@ -352,42 +352,425 @@ Una expresión es un tipo especial de declaración que evalúa a un valor. Cada 
 + *Operandos* - Representan los datos 
 + *Operador* - Define como los operandos serán procesados para producir un valor. 
 
+Consideremos la siguiente expresión -- "2 + 3". En esta expresión, 2 y 3 son *operandos* y el símbolo "+" (suma) es el *operador*. 
+
+En este capítulo, discutiremos los operadores que están disponibles en Dart. 
+
++ Operadores artiméticos
++ Operadores de igualdad y relacionales
++ Operradores de tipo test 
++ Operadores a nivel de bits
++ Operadores de asignación
++ Operadores lógicos 
+
+** Operadores aritméticos 
+
+La siguiente tabla muestra los Operadores artiméticos que soporta Dart. 
+
+| Nº | Operador | Significado                                    |
+|----+----------+------------------------------------------------|
+|  1 | +        | Suma                                           |
+|  2 | -        | Resta                                          |
+|  3 | -expr    | Unitario menos, también conocido como negación |
+|  4 | *        | Multiplicación                                 |
+|  5 | /        | División                                       |
+|  6 | ~/       | División, devolviendo un resultado entero      |
+|  7 | %        | Modulo.                                        |
+|  8 | ++       | Incremento                                     |
+|  9 | --       | Decremento                                     |
 
 
+** Operadores de igualdad y relacionales
+
+Los Operadores relacionales comprueban o definen el tipo de relación entre dos entidades. Los operadores relacionales devuelven un valor Booleano, es decir, verdadero o falso. 
+
+Asumimiendo que A es 10 y B es 20
+
+| Operador | Descripción       | Ejemplo              |
+|----------+-------------------+----------------------|
+| >        | Mayor Que         | (A>B) es Falso       |
+| <        | Menor que         | (A<B) es Verdadero   |
+| >=       | Mayor o igual que | (A>=B) es Falso      |
+| <=       | Menor o igual qu  | (A<=B) ess Verdadero |
+| ==       | Igual a           | (A==B) es Falso      |
+| !=       | No igual          | (A!=B) es Verdadero  |
+
+
+** Operadores de tipo test 
+
+Esos Operadores son útiles para comprobar tipos en tiempo de ejecución 
+
+| Operadores | Significado                                       |
+|------------+---------------------------------------------------|
+| is         | Verdadero si el objeto tiene el tipo especificado |
+| is!        | Falso si el objeto tiene el tipo especificado     |
+
+** Operadores a nivel de Bit 
+
+La siguiente tabla lista los operadores a nivel de bits en Dart y su función -
+
+| Operador                   | Descripción | Ejemplo                                                                                                       |
+|----------------------------+-------------+---------------------------------------------------------------------------------------------------------------|
+| AND                        | a & b       | Devuelve un uno en cada posición de bit por el cual los correspondientes bits o ambos Operadores son uno.     |
+| OR                         | a¦b         | Devuelve un uno en cada posición de bit por el cual los correspondientes bits o alguno o ambos son unos       |
+| XOR                        | a^b         | Devuelve un uno en cada posición de bit por el cual los correspondientes bits de ellos pero no ambos son unos |
+| NOT                        | ~a          | Invierte los bits de sus Operadores                                                                           |
+| Corrimiento a la izquierda | a « b       | Desplaza a en representación binaria b(<32) a la izquierda, dejando ceros a la derecha                        |
+| Corrimiento a la derecha   | a » b       | Desplaza a en representación binaria b(<32) a la derecha                                                      |
+
+** Operadores de asignación 
+
+| Nº | Operadores | Descripción                           |
+|----+------------+---------------------------------------|
+|  1 | =          | Asignación simple                     |
+|  2 | ??=        | Asigna solo si la variable es null    |
+|  3 | +=         | Suma y asigna. C += A -> C = C + A    |
+|  4 | -=         | Sustrae y asigna. C -= A -> C = C - A |
+|  5 | *=         | Multiplica y asigna                   |
+|  6 | /=         | Divide y asigna                       |
+
+*Nota*. La misma lógica se aplica a los operadores sobre Bits, así ellos se convertirán en «=, »=,»=,»=,|= y ^=. 
+
+** Operadores lógicos 
+
+Los Operadores lógicos son usados para combinar dos o más condiciones. Los Operadores lógicos devuelven un valor booleano. Asumiendo el valor de la variable A es 10 y B es 20. 
+
+| Operadores | Descripción                                                                    | Ejemplo                   |
+|------------+--------------------------------------------------------------------------------+---------------------------|
+| &&         | AND- El operador devuelve verdadero si todas las expresiones lo hacen          | (A>10&&B>10) es Falso     |
+| ¦¦         | OR - El operador devuleve verdadero si al menos una de las expresiones lo hace | (A>10¦¦B>10) es Verdadero |
+| \!         | NOT - El operador devuelve lo contrario del resultado de la expresión          | !(A>10) es Verdadero      |
+
+
+** Expresiones condicionales 
+
+Dart tiene dos operadores que permiten evaluar expresiones que podrían de otra forma requerir una declaración ifelse - 
+
+: condition ? expr1 : expr2 
+
+Si la condición es verdadera, entonces la expresión evalúa la *expr1* (y devuelve su valor): de otra forma, evaluará y devolverá el valor de *expr2* 
+
+: expr1 ?? expr2 
+
+Si la *expr1* es non-null, devolverá su valor; de otra forma, evaluará y devolverá el valor de *expr2*
+
+** Ejemplo  
+
+El siguiente ejemplo muestra como podemos usar expresiones condicionales en Dart - 
+
+#+BEGIN_SRC dart 
+  void main(){
+    var a = 10;
+    var res = a > 12 ? "valor mayor que 10":"valor menor o igual que 10";
+    print(res);
+  }
+#+END_SRC
+
+Esto producirá el siguiente resultado - 
+
+: valor menor o igual que 10
+
+Veamos otro ejemplo 
+
+#+BEGIN_SRC dart 
+  void main(){
+    var a = null;
+    var b = 12;
+    var res = a ?? b;
+    print(res);
+  }
+#+END_SRC
+
+
+Esto producirá el siguiente resultado - 
+
+: 12 
+
+* Bucles 
+
+A veces, cierta instrucción requiere una ejecución repetida. Los bucles son una forma ideal de hacerlo. Un bucle representa un conjunto de instrucciones que deben ser repetidas. En el contexto de un bucle, una repetición es llamado una *iteración*. 
+
+La siguiente figura ilustra la clasificación de los bucles - 
+
+[[./images/bucles.png]]
+
+
+Empezaremos la discusión con bucles definidos. Un bucle cuyo numero de ingteraciones está definido/fijado es llamado *bucle definido* 
+
+| Nº | Bucle    | Descripción                                                   |
+|----+----------+---------------------------------------------------------------|
+|  1 | for      | Ejecuta el bloque de código un número especificado de veces.  |
+|  2 | for...in | Es usado para hacer bucles a través de propiedades de objetos |
+
+Ahora discutiremos los bucles indefinidos. Un bucle indefinido es usado cuando el número de iteraciones en un bucle es indeterminado o desconocido. Los bucles indefinidos pueden ser implementados usando - 
+
+| Nº | Bucle      | Descripción                                                                                      |
+|----+------------+--------------------------------------------------------------------------------------------------|
+|  1 | while      | El bucle se ejecuta cada vez que la condición especificada evalúa a verdadero                    |
+|  2 | do...while | Es similar al anterior excepto que no evalúa la condición la primera vez que el bucle se ejecuta |
+
+Vamos la discusión a *las Declaraciones de Control de los Bucles* en Dart. 
+
+| Nº | Declaración de Control | Descripción                                     |
+|----+------------------------+-------------------------------------------------|
+|  1 | break                  | Se usa para sacar el control fuera del bucle    |
+|  2 | continue               | Vuelve el control del bucle al principo de este |
+
+** Ejemplos 
+
+** Usando Etiquetas para el Control del Flujo 
+
+Una *etiqueta* es solo un identificador seguido de dos puntos (:) que es aplicado a la declaración o al bloque de código. Una etiqueta puede ser usada con *break* y *continue* para controlar el flujo de forma más precisa. 
+
+El salto de línea no está permitido entre la declaración *'continue'* o *'break'* el nombre de su etiqueta. Además, no debería haer otra declaración entre el nombre de una etiqueta y su bucle asociado. 
+
+Ejemplo de Etiqueta con Break 
+
+#+BEGIN_SRC dart 
+  void main(){
+  outerloop: // esto es el nombre de la etiqueta 
+
+  for (var i = 0; i < 5; i++){
+      print("Buccle Interior: ${i}");
+      innerloop:
+
+      for (var j = 0; j < 5; j++){
+	if (j > 3) break;
+
+	// Salida del bucle Interior
+	if (i == 2) break innerloop;
+
+	// Hacer lo mismo
+	if (i == 4) break outerloop;
+
+	// Salida del bucle exterior 
+	print("Bucle Interior: ${j}");
+      }
+    }
+  }
+
+  #+END_SRC
+
+La salida mostrará lo siguiente: 
+
+: Bucle Interior: 0 
+: Bucle Interior: 0
+: Bucle Interior: 1
+: Bucle Interior: 2
+: Bucle Interior: 3
+: Bucle Interior: 1
+: Bucle Interior: 0
+: Bucle Interior: 1
+: Bucle Interior: 2
+: Bucle Interior: 3
+: Bucle Interior: 2
+: Bucle Interior: 3
+: Bucle Interior: 0
+: Bucle Interior: 1
+: Bucle Interior: 2
+: Bucle Interior: 3
+: Bucle Interior: 4
+
+Ejemplo de Etiqueta con continue 
+
+#+BEGIN_SRC dart 
+  void main(){
+  outerloop: // Esto es el nombre de la Etiqueta
+
+  for (var i = 0; i < 3; i++){
+      print("BucleExterno:${i}");
+
+      for (var j = 0; j < 5; j++){
+	if (j == 3){
+	  continue outerloop;
+	}
+	print("BucleInterno:${j}");
+      }
+    }
+  }
+  #+END_SRC
+
+La salida será la siguiente: 
+
+: BucleExterno: 0
+: BucleInterno: 0
+: BucleInterno: 1
+: BucleInterno: 2
+
+: BucleExterno: 1
+: BucleInterno: 0
+: BucleInterno: 1
+: BucleInterno: 2
+
+: BucleExterno: 2
+: BucleInterno: 0
+: BucleInterno: 1
+: BucleInterno: 2
+
+
+* Tomando decisiones 
+
+  Un constructor para la toma de decisiones/condicional evalúa una condición antes de que la instrucción sea ejecutada. 
+
+  [[./images/cond.png]]
+
+  Los constructures condicionales  en Dart están clasificados en la siguiente tabla.
+
+| Nº | Declaración   | Descripción                                                                                |
+|----+---------------+--------------------------------------------------------------------------------------------|
+|  1 | if            | Consiste en una expresión booleana seguida de uno o más Declaraciones                      |
+|  2 | if...Else     | Es un if con un bloque condicional que se ejecutará si el primero es falso                 |
+|  3 | else...if     | Es útil para comprobar múltiples condiciones                                               |
+|  4 | switch...case | Evalúa una expresión, compara el valor a un caso y ejecuta la declaración asociada al caso |
+
+** Ejemplos 
+
+* Números 
+
+Los números en Dart pueden ser clasificados como - 
+
++ *Enteros* - Entero de tamaño arbitrario. El tipo de dato entero (*int*) es usado para representar gran cantidad de números. 
++ *doble* - 64-bits (doble-precisión) números de coma flotante, tal como son especificados por el estándar IEEE 754. El tipo de dato doble (*double*) es usando para representar números fraccionales. 
+
+El tipo *num* es inherente a los tipos *entero* y *doble*. La *biblioteca central de Dart* permite numerosas operaciones sobre los valores numéricos. 
+
+La sintaxis para declarar un número es la siguiente - 
+
+#+BEGIN_SRC dart 
+int nombre_variable;      // Declara una variable entera
+double nombre_variable;  // Declara una variable doble
+#+END_SRC
+
+Ejemplo: 
+
+#+BEGIN_SRC dart
+  void main(){
+    // declarando un entero 
+    int num1 = 10;
+
+    // declarando un valor doble
+    double num2 = 10.50;
+
+    // imprime los valores 
+    print(num1);
+    print(num2);
+  } 
+#+END_SRC
+
+Esto producirá la siguiente salida - 
+
+: 10 
+: 10.5
+
+** Analizando 
+
+La funcion estántica *parse()* permite analizar una cadena conteniendo un número literal en un número. El siguiente ejemplo lo demuestra - 
+
+#+BEGIN_SRC dart 
+  void main(){
+    print(num.parse('12'));
+    print(num.parse('10.91'));
+  }
+#+END_SRC
+
+Lo que mostrará la siguiente salida - 
+
+: 12 
+: 10.91
+
+La función *parse* lanzará un *FormatException* si pasamos cualquier valor que no sea un número. El siguiente código muestra como pasr un valor alfa-numérico a la función *parse()* 
+
+Ejemplo 
+
+#+BEGIN_SRC dart 
+  void main(){
+    print(num.parse('12A'));
+    print(num.parse('AAAA'));
+  }
+#+END_SRC
+
+Lo que producirá el siguiente resultado - 
+
+#+BEGIN_SRC
+Unhandled exception:
+FormatException: 12A
+#0      num.parse (dart:core/num.dart:474:26)
+#1      main (file:///home/maxxcan/aa.dart:2:13)
+#2      _startIsolate.<anonymous closure> (dart:isolate-patch/isolate_patch.dart:301:19)
+#3      _RawReceivePortImpl._handleMessage (dart:isolate-patch/isolate_patch.dart:168:12)
+#+END_SRC
+
+** Propiedades de los números 
+
+La siguiente tabla lista las propiedades soportadas por los números en Dart. 
+
+| Nº | Propiedad  | Descripción                                              |
+|----+------------+----------------------------------------------------------|
+|  1 | hashcode   | Devuelve un código resumen de un valor numérico          |
+|  2 | isFinite   | Verdadero si el número es finito                         |
+|  3 | isInfinite | Verdadero si el número es infinito                       |
+|  4 | isNan      | Verdadero si el númro es el doble No-un-Número           |
+|  5 | isNegative | Verdadero si el número es negativo                       |
+|  6 | sign       | Devuelve menso uno, cero o más uno dependiendo del signo |
+|  7 | isEven     | Verdadero si el numero es par                            |
+|  8 | isOdd      | Verdadero si el número es impar                          |
+
+*** Ejemplos 
+
+** Métodos numéricos 
+
+Veamos los métodos soportados por los números en Dart - 
+
+| Nº | Método    | Decripción                                                         |
+|----+-----------+--------------------------------------------------------------------|
+|  1 | abs       | Devuelve el valor absoluto del número                              |
+|  2 | ceil      | Devuelve un entero no más pequeño que el número                    |
+|  3 | compareTo | Compara dos números                                                |
+|  4 | Floor     | Devuelve el mayor número no mayor al número dado                   |
+|  5 | remainder | Devuelve el resto después de dividir dos números                   |
+|  6 | Round     | Devuelve el entero más cercano al número dado                      |
+|  7 | toDouble  | Devuelve el equivalente doble del número                           |
+|  8 | toInt     | Devuelve el equivalente entero del número                          |
+|  9 | toString  | Devuelve el equivalente de texto del número                        |
+| 10 | truncate  | Devuelve un entero después de decartar cualquier número fraccional |
+
+*** Ejemplos 
+
+* Cadena de caractéres 
 
 * Clases 
 
-Dart es un lenguaje orientado a objetos. Soporta características de programación orientada a objetos como clases, interfaces, etc. Una clase en terminos de OOP es un plano para crear objetos. Una clase encapsula datos para el objeto. Dart ofrece soporte para este concepto llamado *clase*. 
+  Dart es un lenguaje orientado a objetos. Soporta características de programación orientada a objetos como clases, interfaces, etc. Una clase en terminos de OOP es un plano para crear objetos. Una clase encapsula datos para el objeto. Dart ofrece soporte para este concepto llamado *clase*. 
 
 ** Declarando una clase 
 
-Se usa la palabra clave *class* para declarar un clase. Una definición de clase empieza con la palabra clave class seguido de un *nombre de clase*; y el cuerpo encerrado por un par de llaves. La sintaxis es la siguiente: 
+   Se usa la palabra clave *class* para declarar un clase. Una definición de clase empieza con la palabra clave class seguido de un *nombre de clase*; y el cuerpo encerrado por un par de llaves. La sintaxis es la siguiente: 
 
-#+BEGIN_SRC 
-Syntax 
+   #+BEGIN_SRC 
+   Syntax 
 
-class class_name {
+   class class_name {
 <campos>
 <getters/setters>
 <constructores>
 <funciones>
 }
-#+END_SRC
+   #+END_SRC
 
-La palabra clave *class* es seguida por el nombre de la clase. Las reglas para los identificadores deben ser consideradas también para los nombres de clases.
+   La palabra clave *class* es seguida por el nombre de la clase. Las reglas para los identificadores deben ser consideradas también para los nombres de clases.
 
-Un definición de clase puede incluir lo siguiente: 
+   Un definición de clase puede incluir lo siguiente: 
 
-- *Campos* - Un campo es cualquier variable declarada en una clase. Los campos representan datos pertenecientes a lo objetos.
-- *Setters y Getters* - Permiten al programa iniciar y recibir valores de los campos de una clase. Un getter/setter por defecto es asociado con cada clase. Sin embargo, éste puede ser anulado definiendo explícitamente un setter/getter.
-- *Constructores* - Responsables de asignar memoria para el objeto de la clase. 
-- *Funciones* - Las funciones representan las acciones que un objeto puede tomar. También son referidas como *métodos*.
+   - *Campos* - Un campo es cualquier variable declarada en una clase. Los campos representan datos pertenecientes a lo objetos.
+   - *Setters y Getters* - Permiten al programa iniciar y recibir valores de los campos de una clase. Un getter/setter por defecto es asociado con cada clase. Sin embargo, éste puede ser anulado definiendo explícitamente un setter/getter.
+   - *Constructores* - Responsables de asignar memoria para el objeto de la clase. 
+   - *Funciones* - Las funciones representan las acciones que un objeto puede tomar. También son referidas como *métodos*.
 
-Esos componentes puestos juntos son denominados como los datos de los miembros de la clase. 
+   Esos componentes puestos juntos son denominados como los datos de los miembros de la clase. 
 
-Ejemplo:
+   Ejemplo:
 
-#+BEGIN_SRC dart 
+   #+BEGIN_SRC dart 
   class Car {
     // campo
     String engine = "E1001";
@@ -397,46 +780,46 @@ Ejemplo:
       print(engine);
     }
   }
-#+END_SRC
+   #+END_SRC
 
-En el ejemplo declaramos una clase llamada *Car*. La clase tiene un campo llamado *engine*. Y una simple función *disp()* que escribe el valor del campo *engine*.
+   En el ejemplo declaramos una clase llamada *Car*. La clase tiene un campo llamado *engine*. Y una simple función *disp()* que escribe el valor del campo *engine*.
 
 ** Creando una instancia de la clase 
 
-Para crear una instancia de la clase, usamos la palabra clave *new* seguido del nombre de la clase. La sintaxis es la siguiente:
+   Para crear una instancia de la clase, usamos la palabra clave *new* seguido del nombre de la clase. La sintaxis es la siguiente:
 
-#+BEGIN_SRC 
+   #+BEGIN_SRC 
 Syntax
 
 var nombre_del_objeto = new nombre_clase([ argumentos ])
-#+END_SRC
+   #+END_SRC
 
-+ La palabra clave *new* es responsable de la instanciación. 
-+ El lado derecho de la expresión invoca al constructor. El constructor puede pasar valores si son parametrizados.
+   + La palabra clave *new* es responsable de la instanciación. 
+   + El lado derecho de la expresión invoca al constructor. El constructor puede pasar valores si son parametrizados.
 
-/Ejemplo de una instancia de clase/
+   /Ejemplo de una instancia de clase/
 
-#+BEGIN_SRC dart
+   #+BEGIN_SRC dart
   var obj = new Car("Engine 1")
-#+END_SRC
+   #+END_SRC
 
 ** Accediendo a Atributos y Funciones
 
-Los atributos y funciones de una clase pueden ser accedidos a través del objeto. Usando la *notación de punto* (llamado *periodo*) para acceder a los miembros de los datos de una clase.
+   Los atributos y funciones de una clase pueden ser accedidos a través del objeto. Usando la *notación de punto* (llamado *periodo*) para acceder a los miembros de los datos de una clase.
 
-#+BEGIN_SRC dart
+   #+BEGIN_SRC dart
 //accediendo a un atributo
 obj.nombre_del_campo
 
 //accediendo a una función
 obj.nombre_de_la_función()
-#+END_SRC
+   #+END_SRC
 
-/Ejemplo/
+   /Ejemplo/
 
-Echemos un ojo al siguiente ejemplo para entender como acceder a los atributos y funciones en Dart
+   Echemos un ojo al siguiente ejemplo para entender como acceder a los atributos y funciones en Dart
 
-#+BEGIN_SRC dart
+   #+BEGIN_SRC dart
   void main(){
     Car c= new Car();
     c.disp();
@@ -450,27 +833,27 @@ Echemos un ojo al siguiente ejemplo para entender como acceder a los atributos y
       print(engine);
     }
   }
-#+END_SRC
+   #+END_SRC
 
-La salida del código anterior es el siguiente - 
+   La salida del código anterior es el siguiente - 
 
-: E1001
+   : E1001
 
 ** Constructores en Dart
 
-Un constructor es una función especial de la clase que es la responsable de inicializar las variables de la clase. Dart define un constructor con el mismo nombre de la clase. Un constructor es una función y por lo tanto puede ser parametrizada. Sin embargo, a diferencia de una función, los constructores no pueden tener un tipo de retorno. Si no se declara un constructor, un constructor sin argumentos por defecto es proporcionado por tí. 
+   Un constructor es una función especial de la clase que es la responsable de inicializar las variables de la clase. Dart define un constructor con el mismo nombre de la clase. Un constructor es una función y por lo tanto puede ser parametrizada. Sin embargo, a diferencia de una función, los constructores no pueden tener un tipo de retorno. Si no se declara un constructor, un constructor sin argumentos por defecto es proporcionado por tí. 
 
-/Sintáxis/
+   /Sintáxis/
 
-#+BEGIN_SRC 
+   #+BEGIN_SRC 
 Nombre_de_la_Clase(lista_de_parámetros){
 //cuerpo del constructor
 }
-#+END_SRC
+   #+END_SRC
 
-El siguiente ejemplo muestra como se usa un constructor en Dart. 
+   El siguiente ejemplo muestra como se usa un constructor en Dart. 
 
-#+BEGIN_SRC dart
+   #+BEGIN_SRC dart
   void main(){
     Car c = new Car('E1001');
   }
@@ -480,25 +863,25 @@ El siguiente ejemplo muestra como se usa un constructor en Dart.
     }
   }
 
-#+END_SRC
+   #+END_SRC
 
-Esto dará la siguiente salida - 
+   Esto dará la siguiente salida - 
 
-: E1001
+   : E1001
 
 ** Constructores nombrados (Named Constructor)
 
-Dart proporciona *named constructor* para habilitar una definición de clase con múltiples constructores. La sintaxis es la siguiente- 
+   Dart proporciona *named constructor* para habilitar una definición de clase con múltiples constructores. La sintaxis es la siguiente- 
 
-/Sintáxis: Definiendo el constructor/
+   /Sintáxis: Definiendo el constructor/
 
-#+BEGIN_SRC 
+   #+BEGIN_SRC 
 Nombre_clase.nombre_constructor(lista_de_parámetros)
-#+END_SRC
+   #+END_SRC
 
-Ejemplo:
+   Ejemplo:
 
-#+BEGIN_SRC dart
+   #+BEGIN_SRC dart
   void main() {
     Car c1 = new Car.namedConst('E1001');
     Car c2 = new Car();
@@ -511,22 +894,22 @@ Ejemplo:
       print("El motor es : ${engine}");
     }
   }
-#+END_SRC
+   #+END_SRC
 
-Esto producirá la siguiente salida:
+   Esto producirá la siguiente salida:
 
-: El motor es: E1001
-: Constructor sin parámetros invocado
+   : El motor es: E1001
+   : Constructor sin parámetros invocado
 
 ** La palabra clave /this/
 
-La palabra clave *this* se refiere a la instancia actual de la clase. Aquí, el parámetro llamado y el nombre del campo de la clase son el mismo. Por lo tanto para evitar la ambigüedad, el campo de la clase se le pone el prefijo *this*. El siguiente ejemplo explica ésto.
+   La palabra clave *this* se refiere a la instancia actual de la clase. Aquí, el parámetro llamado y el nombre del campo de la clase son el mismo. Por lo tanto para evitar la ambigüedad, el campo de la clase se le pone el prefijo *this*. El siguiente ejemplo explica ésto.
 
-/Ejemplo/
+   /Ejemplo/
 
-El siguiente ejemplo explica como usar la palabra clave *this* en Dart
+   El siguiente ejemplo explica como usar la palabra clave *this* en Dart
 
-#+BEGIN_SRC dart
+   #+BEGIN_SRC dart
   void main(){
     Car c1 = new Car('E1001');
   }
@@ -537,39 +920,39 @@ El siguiente ejemplo explica como usar la palabra clave *this* en Dart
       print("El motor es : ${engine}")
     }
   }
-#+END_SRC
+   #+END_SRC
 
-Esto dará como resultado:
+   Esto dará como resultado:
 
-: El motor es : E1001
+   : El motor es : E1001
 
 ** Getters and setters
 
-Getters and Setters, también llamados accesores (accessors) y mutadores (mutators), permiten al programa inicializar y recibir los valores de los campos de las clases respectivamente. Getters o accesores son definidos usando la palabra clave get. Los Setters o mutadores son definidos usando la palabra clave set.
+   Getters and Setters, también llamados accesores (accessors) y mutadores (mutators), permiten al programa inicializar y recibir los valores de los campos de las clases respectivamente. Getters o accesores son definidos usando la palabra clave get. Los Setters o mutadores son definidos usando la palabra clave set.
 
-Un setter/getter por defecto es asociado a cada clase. Sin embargo, pueden ser invalidados definiendolos explícitamente. Un getter no tiene parámetros y devuelve un valor, y un setter tiene un parámetro y no devuelve ningún valor. 
+   Un setter/getter por defecto es asociado a cada clase. Sin embargo, pueden ser invalidados definiendolos explícitamente. Un getter no tiene parámetros y devuelve un valor, y un setter tiene un parámetro y no devuelve ningún valor. 
 
-/Sintáxis: Definiendo un getter/
+   /Sintáxis: Definiendo un getter/
 
-#+BEGIN_SRC 
+   #+BEGIN_SRC 
 Return type get identificador
 {
 }
-#+END_SRC
+   #+END_SRC
 
-/Sintáxis: Definiendo un setter/ 
+   /Sintáxis: Definiendo un setter/ 
 
-#+BEGIN_SRC 
+   #+BEGIN_SRC 
 set identificador 
 {
 }
-#+END_SRC
+   #+END_SRC
 
-/Ejemplo/
+   /Ejemplo/
 
-El siguiente ejemplo muestra como usar getters y setters en Dart - 
+   El siguiente ejemplo muestra como usar getters y setters en Dart - 
 
-#+BEGIN_SRC dart
+   #+BEGIN_SRC dart
   class Student{
     String name;
     int age;
@@ -601,31 +984,31 @@ El siguiente ejemplo muestra como usar getters y setters en Dart -
     print(s1.stud_name);
     print(s1.stud_age);
   }
-#+END_SRC
+   #+END_SRC
 
-Este programa producirá la siguiente salida 
+   Este programa producirá la siguiente salida 
 
-: La edad debe ser mayor que 5
-: Pedro
-: Null
+   : La edad debe ser mayor que 5
+   : Pedro
+   : Null
 
 ** Herencia de clase
 
-Dart soporta el concepto de herencia el cual es la habilidad de un programa  de crear una nueva clase de una clase existente. La clase que es extendida para crear nuevas clases es llamada clase padre o superclase. La clase nueva creada es llamada la clase hija o subclase. 
+   Dart soporta el concepto de herencia el cual es la habilidad de un programa  de crear una nueva clase de una clase existente. La clase que es extendida para crear nuevas clases es llamada clase padre o superclase. La clase nueva creada es llamada la clase hija o subclase. 
 
-Una clase hereda de otra clase usando la palabra clave 'extends'. Las clases hijas heredan todas las propiedades y métodos, excepto el constructor de la clase padre. 
+   Una clase hereda de otra clase usando la palabra clave 'extends'. Las clases hijas heredan todas las propiedades y métodos, excepto el constructor de la clase padre. 
 
-/Sintáxis/
+   /Sintáxis/
 
-: class nombre_clase_hija extends nombre_clase_hija
+   : class nombre_clase_hija extends nombre_clase_hija
 
-*Nota*. Dart no soporta la herencia múltiple. 
+   *Nota*. Dart no soporta la herencia múltiple. 
 
-/Ejemplo de herencia de clase/
+   /Ejemplo de herencia de clase/
 
-En el siguiente ejemplo, vamos a declarar una clase Forma. La clase es extendida por la clase Círculo. 
+   En el siguiente ejemplo, vamos a declarar una clase Forma. La clase es extendida por la clase Círculo. 
 
-#+BEGIN_SRC dart
+   #+BEGIN_SRC dart
 
   void main(){
     var obj  new Circle();
@@ -639,19 +1022,19 @@ En el siguiente ejemplo, vamos a declarar una clase Forma. La clase es extendida
   }
   class Circle extends Shape {}
 
-#+END_SRC
+   #+END_SRC
 
-Esto produce la siguiente salida - 
+   Esto produce la siguiente salida - 
 
-: llamando al cáluclo de area definido en la clase Forma
+   : llamando al cáluclo de area definido en la clase Forma
 
 *** Tipos de Herencia 
 
-La herencia puede seguir tres tipos - 
+    La herencia puede seguir tres tipos - 
 
-1) *Simple* - Cada clase puede al menos extender de una clase padre
-2) *Múltiple* - Una clase puede heredar de múltiples clases. Dart no soporta la herencia múltiple
-3) *Multi-level* - Una clase puede heredar de otra clase hija. 
+    1) *Simple* - Cada clase puede al menos extender de una clase padre
+    2) *Múltiple* - Una clase puede heredar de múltiples clases. Dart no soporta la herencia múltiple
+    3) *Multi-level* - Una clase puede heredar de otra clase hija. 
 
 El siguiente ejemplo muestra como funciona la herencial Multi-level. 
 
