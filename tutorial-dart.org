@@ -738,6 +738,137 @@ Veamos los métodos soportados por los números en Dart -
 
 * Cadena de caractéres 
 
+Los datos tipo cadadena de caractéres repreentan una secuencia de caracteres. Una cadena de carateres en Dart es una secuencia de codificación de unidad UTF-16
+
+Los valores de cadena de caracteres en Dart pueden ser repreentados usando comillas simples o dobles. Una sola línea se representa con comillas dobles o sencillas. Las comillas triples son usadas para representar cadena de caracteres multilínea. 
+
+La sintaxis para representar cadenas de caracteres en Dart se muestra a continuación - 
+
+** Sintaxis 
+
+#+BEGIN_SRC dart 
+String nombre_variable = 'valor'
+
+OR 
+
+String nombre_variable = ''valor'' 
+
+OR
+
+String nombre_variable = '''linea1
+
+OR 
+
+String nombre_variable= ''''''linea1
+linea2''''''
+#+END_SRC
+
+Los siguientes ejemplos ilustran el uso de la cadena de caracteres en Dart 
+
+#+BEGIN_SRC dart 
+  void main(){
+    String str1 = 'Esto es una línea de caracteres';
+    String str2 = "Esto es una línea de carateres";
+    String str3 = '''Esto es una multilínea de caracteres''';
+    String str4 = """Esto es una multilinea de caracteres""";
+
+    print(str1);
+    print(str2);
+    print(str3);
+    print(str4);
+  }
+#+END_SRC
+
+Esto producirá la siguiente salida - 
+
+: Esto es una línea de caracteres 
+: Esto es una línea de caracteres 
+: Esto es una multilínea de caracteres 
+: Esto es una multilínea de caracteres 
+
+Las cadenas de caracteres son inmutables. Sin embargo, pueden ser sujetas a varias operaciones y la cadena de texto resultante será guardada como un nuevo valor. 
+
+** Interpolación en cadenas de caracteres 
+
+El proceso de crear una nueva cadena de caracteres por agregación de un valor a una cadena estática es llamado como *concatenación* o *interpolación*. En otras palabras, es el proceso de añadir una cadena de caracteres a otra. 
+
+El operador suma (+) es comúnmente usado ccomo mecanismo de concatenar/interpolar cadenas de caracteres. 
+
+*** Ejemplo 1
+
+#+BEGIN_SRC dart 
+  void main(){
+    String str1 = "Hola";
+    String str2 = "Mundo";
+    String res = str1+str2;
+
+    print("La cadena concatenada es: ${res}")
+  }
+#+END_SRC
+
+La salida que se producirá será: 
+
+: La cadena concatenada es: HolaMundo
+
+*** Ejemplo 2 
+
+Podemos usar "${}" para interpolar el valor de una expresión en Dart con cadenas de caracteres. El siguiente ejemplo  lo ilustra. 
+
+#+BEGIN_SRC dart 
+  void main(){
+    int n=1+1;
+
+    String str1 = "La suma de 1 y 1 es ${n}";
+    print(str1);
+
+    String str2 = "La suma de 2 y 2 es ${2+2}";
+    print(str2);
+#+END_SRC
+
+Esto producirá la siguiente salida 
+
+: La suma de 1 y 1 es 2
+: La suma de 2 y 2 es 4
+
+** Propiedades de las cadenas de caracteres 
+
+La siguiente tabla muestra las propiedades de las cadenas de caracters en Dart
+
+| Nº | Propiedades | Descripción                                                                                  |
+|----+-------------+----------------------------------------------------------------------------------------------|
+|  1 | codeUnits   | Devuelve una lista de inamobibles códigos UTF-16                                             |
+|  2 | isEmpty     | Devuelve verdadero si la cadena está vacía                                                   |
+|  3 | Length      | Devulve la longitud de la cadena incluyedo espacios en blanco, tabuladores y saltos de línea |
+|    |             |                                                                                              |
+
+*** Ejemplos 
+
+** Métodos para manipular cadenas de caracteres 
+
+La clase Cadena de caracteres en la *biblioteca core de Dart* también proporciona métodos para manipular cadenas de caracteres. Algunos de esos métodos son mostrados a continuación - 
+
+| Nº | Método        | Descripción                                                                        |
+|----+---------------+------------------------------------------------------------------------------------|
+|  1 | toLowerCase() | Convierte los caratéres a minúsculas                                               |
+|  2 | toUpperCase() | Convierte los caracteres a mayúsculas                                              |
+|  3 | trim()        | Devuelve la cadena sin espacios delante o detrás                                   |
+|  4 | compareTo()   | Compara este objeto a otro                                                         |
+|  5 | replaceAll()  | Reemplaza todas las subcadenas especificadas con un patrón, con un valor dado      |
+|  6 | split()       | Corta la cadena con un número delimitado de caracteres dando lugar a subcaracteres |
+|  7 | substring()   | Devuelve subcadenas siguiendo un índice                                            |
+|  8 | toString()    | Devuelve un representación de cadena de caracteres de este objeto                  |
+|  9 | codeUnitAt()  | Devuelve la codificación UTF-16 de un índice dado                                  |
+
+*** Ejemplos 
+
+* Booleanos 
+
+
+
+
+
+
+
 * Clases 
 
   Dart es un lenguaje orientado a objetos. Soporta características de programación orientada a objetos como clases, interfaces, etc. Una clase en terminos de OOP es un plano para crear objetos. Una clase encapsula datos para el objeto. Dart ofrece soporte para este concepto llamado *clase*. 
