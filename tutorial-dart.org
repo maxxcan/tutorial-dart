@@ -863,8 +863,71 @@ La clase Cadena de caracteres en la *biblioteca core de Dart* también proporcio
 
 * Booleanos 
 
+Dart proporciona soporte interno para tipo de datos booleanos. Los tipos booleanos en Dart soporta solo dos valores - verdadero y falso. La palabra clave *bool* es usada para representar un booleano literal en Dart. 
 
+La sintaxis para declarar una variable booleana en Dart es la siguiente - 
 
+#+BEGIN_SRC dart 
+bool nombre_variable = true;
+OR
+bool nombre_variable  false;
+#+END_SRC
+
+** Ejemplo 
+
+#+BEGIN_SRC dart 
+void main(){
+bool test;
+test = 12 > 5;
+print(test);
+}
+#+END_SRC
+
+Producirá la salida 
+
+: true 
+
+** Ejemplo 
+
+A diferencia de JavaScript, el tipo de dato booleano solo reconoce el literal true como true.. Cualquier otro valor será reconocido como falso. Consideremos el siguiente ejemplo - 
+
+#+BEGIN_SRC dart 
+  var str = 'abc';
+  if(str) {
+    print('La cadena no está vacía');
+  } else {
+    print('Cadena vacía');
+  }
+#+END_SRC
+
+El código anterior, si se ejecutase en JavaScript, mostraría el mensaje 'La cadena no está vacía' como si el constructor devolviera true si la cadena no lo estuviera.
+
+Sin embargo, en Dart, *str* se convierte en falso como str != true. Aquí el código mostrará el mensaje de 'Cadena vacía'. 
+
+** Ejemplo 
+
+El siguiente código arrojará una excepción. 
+
+#+BEGIN_SRC dart 
+  void main(){
+    var str = 'abc';
+    if(str) {
+      print('La cadena no está vacía');
+    } else {
+      print('Cadena vacía');
+    }
+  }
+#+END_SRC
+
+Producirá la siguiente salida 
+
+#+BEGIN_SRC dart 
+aa.dart:3:6: Error: A value of type 'String' can't be assigned to a variable of type 'bool'.
+  if(str){
+     ^
+#+END_SRC
+
+* Listas 
 
 
 
