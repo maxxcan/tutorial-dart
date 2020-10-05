@@ -1079,7 +1079,106 @@ Los Mapas pueden ser declarados de dos formas -
 + Usando el Literal Map
 + Usando un constructor Map 
 
-** Declarando un Map
+** Declarando un Mapa usnado el Literal Map 
+
+Para declarar un mapa usando el literal Map, necesitamos encerrar el par clave/valor entre llaves *"{}"*. 
+
+Aquí la sintaxis 
+
+#+BEGIN_SRC dart 
+var identificador = { clave1:valor1, clave2:valor2, [,.. . . clave_n:valor_n] }
+#+END_SRC
+
+** Declarando un mapa usando un constructor Map 
+
+Para declarar un mapa usando un constructor Map, tenemos que dar dos pasos. Primero, declarar el mapa y segundo inizializar el mapa. 
+
+La *sintasis* para *declarar un mapa* es la siguiente 
+
+#+BEGIN_SRC dart 
+var identificador = new Map()
+#+END_SRC
+
+Ahora, usaremos la siguiente sintaxis para *inicializar el mapa* - 
+
+#+BEGIN_SRC dart 
+nombre_mapa[clave] = valor
+#+END_SRC
+
+** Ejemplos 
+
+Ejemplo: Literal Map 
+
+#+BEGIN_SRC dart 
+  void main(){
+    var details = {'nombre':'Tom', 'Contraseña':'1234'};
+    print(details);
+  }
+#+END_SRC
+
+Producirá la siguiente salida - 
+
+: {nombre: Tom, Contraseña: 1234}
+
+Ejemplo: Añadiendo valores al Mapa Literal en tiempo de ejecución 
+
+#+BEGIN_SRC dart 
+  void main(){
+    var details = {'nombre':'tom', 'Contraseña':'1234'};
+    details['Uid'] = 'U1001';
+    print(details);
+  }
+#+END_SRC
+
+Esto producirá el siguiente resultado - 
+
+: {nombre: tom, Contraseña: 1234, Uid: U1001}
+
+Ejemplo: Constructor Map 
+
+#+BEGIN_SRC dart 
+  void main(){
+    var details = new Map();
+    details['Nombre'] = 'admin';
+    details['Contraseña'] = '1234';
+    print(details);
+  }
+#+END_SRC
+
+
+Esto producirá la siguiente salida -
+
+: {Nombre: admin, Contraseña: 1234}
+
+*Nota* - Un valor de un mapa puede ser cuaulquier objeto incluído NULL 
+
+** Propiedades de los Mapas 
+
+La clase *Map* del paquete dart:core define las siguientes propiedades 
+
+| Nº | Propiedad  | Descripción                                            |
+|----+------------+--------------------------------------------------------|
+|  1 | Keys       | Devuelve un objeto repetible representando claves      |
+|  2 | Values     | Devuelve un objeto repetible representando los valores |
+|  3 | Length     | Devuelve el tamaño del Mapa                            |
+|  4 | isEmpty    | Devuelve verdadero si el mapa está vacío               |
+|  5 | isNotEmpty | Devuelve verdadero si el Mapa no está vacío            |
+
+** Funciones de los Mapas 
+
+Lo siguiente son las funciones más usadas para manipular Mapas en Dart 
+
+| Nº | Nombre de la función | Descripción                                          |
+|----+----------------------+------------------------------------------------------|
+|  1 | addAll()             | Añade todos los pares clave-valor de un mapa a otro  |
+|  2 | clear()              | Elimina todos los pares del Mapa                     |
+|  3 | remove()             | Elimina la clave y valor asociado si existe del Mapa |
+|  4 | forEach()            | Aplica f a cada par clave-valor del Mapa             |
+
+** Ejemplos 
+
+
+* Símbolos 
 
 
 * Clases 
