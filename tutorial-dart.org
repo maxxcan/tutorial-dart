@@ -929,7 +929,157 @@ aa.dart:3:6: Error: A value of type 'String' can't be assigned to a variable of 
 
 * Listas 
 
+Algo muy usado en programación son los *array*. Dart representa los arrays en la forma de objetos *Lista*. Una *Lista* es solo un grupo de objetos. La biblioteca *dart:core* proporciona la clase List que habilita la creación y manipulación de listas. 
 
+La representación lógica de una lista en Dart es la siguiente - 
+
+[[./images/lista.png]]
+
++ *test_list* - es el identificador que refiere la colección
++ La lista contiene en ella los valores 12, 13 y 14. Los bloques de memoria mantienen esos valores que son conocidos como *elementos*.
++ Cada elemento en la Lista es identificado por un número único llamado *índice*. El índice empieza desde *cero* y se extiende *n-1* donde *n* es el número total de elementos en la Lista. El índice es también refereido como el *subscript*. 
+
+La lista puede ser clasificada como - 
+
++ Lista de longitud fija
++ Lista ampliable 
+
+Vamos ahora a discutir esos dos tipos de *listas* en detalle.
+
+** Lista de longitud fija
+
+
+
+Una lista de longitud fija no puede cambiar en tiempo de ejecución. La sintaxis para crear una lista de longitud fija es la siguiente, es como sigue. 
+
+*** Declarando una lista 
+
+La Sintaxis para declarar una lista es la siguiente - 
+
+#+BEGIN_SRC dart 
+var nombre_lista = new List(tamaño_inicial)
+#+END_SRC
+
+La sintaxis anterior crea una lista de tamaño especificado. La lista no puede crecer o disminuir en tiempo de ejecución. Cualquier intento de cambiarle el tamaño resultaría en una excepción. 
+
+*** Inicializando una lista 
+
+La Sintaxis para inicializar una lista dada es la siguiente - 
+
+#+BEGIN_SRC dart 
+nombre_lista[indice] = valor;
+#+END_SRC
+
+Ejemplo 
+
+#+BEGIN_SRC dart 
+  void main() {
+    var lst = new List(3);
+    lst[0] = 12;
+    lst[1] = 13;
+    lst[2] = 11;
+
+    print(lst);
+  }
+#+END_SRC
+
+
+Esto producirá el siguiente resultado 
+
+: [12, 13, 11]
+   
+
+** Lista ampliable 
+
+Una lista ampliable puede cambiar en tiempo de ejecución. La sintaxis para declarar e inicializar un lista ampliable es la siguiente - 
+
+*** Paso 1 - Declarando una lista 
+
+#+BEGIN_SRC dart 
+var nombre_lista = [val1, val2, val3]
+--- crea una lista que contiene valores espcificados 
+OR 
+var nombre_lista = new List()
+--- crea una lista de tamaño cero 
+#+END_SRC
+
+*** Paso 2 - Inicializando una lista 
+
+El índice/subscript es usado para referenciar el elemento que podría ser poblando con un valor. La sintaxis para inicializar una lista es dada a continuación - 
+
+#+BEGIN_SRC dart 
+nombre_lista[indice] = valor;
+#+END_SRC
+
+
+Ejemplo 
+
+El siguiente ejemplo muestra como crear una lista de 3 elementos. 
+
+#+BEGIN_SRC dart 
+  void main(){
+    var num_list = [1,2,3];
+    print(num_list);
+  }
+#+END_SRC
+
+Esto producirá el siguiente resultado - 
+
+: [1, 2, 3]
+
+Ejemplo 
+
+El siguiente ejemplo crea una lista de longitud cero usando el *constructor empty List()*. La función *add()* en la clase *List* es usada dinamicamente para añadir elementos a la lista. 
+
+#+BEGIN_SRC dart 
+  void main(){
+    var lst = new List();
+    lst.add(12);
+    lst.add(13);
+    print(lst);
+  }
+#+END_SRC
+
+Que producirá el siguiente resultado - 
+
+: [12, 13]
+
+
+** Propiedades de las listas 
+
+La siguiente tabla lista las propiedades más communmente usadas de la clase *List* de la biblioteca *dart:core* 
+
+| Nº | Métodos    | Descripción                                                                     |
+|----+------------+---------------------------------------------------------------------------------|
+|  1 | first      | Devuelve el primer elemento                                                     |
+|  2 | isEmpty    | Devuelve verdadero si la colección no tiene elementos                           |
+|  3 | isNotEmpty | Devuelve Verdadero si la colección tiene al menos un elemento                   |
+|  4 | length     | Devuelve el tamaño de la lista                                                  |
+|  5 | last       | Devuelve el último elemento de la lista                                         |
+|  6 | reversed   | Devuelve un obbjeto repetible que contiene la lista de valores en orden inverso |
+|  7 | Single     | Compruea si la lista tiene solo un elemento y lo devuelve                       |
+
+*** Ejemplos 
+** Operaciones básicas en las Listas 
+
+En la siguiente tabla veremos algunas operaciones básicas que se pueden realizar en una Lista como - 
+
+| Nº | Operación                       | Descripción                                                                     |
+|----+---------------------------------+---------------------------------------------------------------------------------|
+|  1 | Insertar elementos              | Esto se hace con la función *List.add()*                                        |
+|  2 | Actualizar una lista            | Se puede hacer actualizando el índice o usando la función *List.replaceRange()* |
+|  3 | Eliminiar elementos de la lista | Se puede hacer con las siguientes funciones que veremos en los ejemplos         |
+
+* Mapa 
+
+El objeto Mapa es un simple par clave/valor. Claves y valores en un mapa pueden ser cualquier tipo de dato. Un Mapa es una colección dinámica. En otras palabras, los Mapas pueden crecer o disminuir en tiempo de ejecución. 
+
+Los Mapas pueden ser declarados de dos formas - 
+
++ Usando el Literal Map
++ Usando un constructor Map 
+
+** Declarando un Map
 
 
 * Clases 
