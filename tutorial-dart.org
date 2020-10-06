@@ -1180,6 +1180,174 @@ Lo siguiente son las funciones más usadas para manipular Mapas en Dart
 
 * Símbolos 
 
+Los símbolos en Dart son opacos, nombres de caractéres dinámicos usados en reflejar metadatos desde una librería. Simplemente poner, símbolos son una forma de guardar la relación entre una cadena leíble por un humano y una cadena que esté optimizada para ser usada por las computadoras. 
+
+Reflección es un mecanismo para obtener metadatos de un tipo en tiempo de ejecución como el número de métodos en una clase, el número de constructores que tiene o el número de parámetros en una función. Podemos incluso invocar un método del tipo el cual es cargado en tiempo de ejecución. 
+
+En Dart la reflección específica de clases está disponible en el paquete *dart:mirrors*. Esta biblioteca funciona tanto en aplicaciones web como en aplicaciones de línea de comandos. 
+
+** Sintaxis  
+
+#+BEGIN_SRC dart 
+Symbol obj = new Symbol('nombre');
+// espera el nombre de una clase o función o biblioteca para reflejar 
+#+END_SRC
+
+El *nombre* debbe ser un nombre de miembro público válido en Dart, nombre de constructor público, o nombre de biblioteca.
+
+** Ejemplo
+
+Consideremos el siguiente ejemplo. El código declara una clase *Foo* en una biblioteca *foo_lib*. La clase define los métodos *m1, m2, y m3*. 
+
+*Foo.dart*
+
+#+BEGIN_SRC dart 
+  library foo_lib;
+  // el nombre de la biblioteca puede ser un símbolo
+
+  class Foo {
+    // el nombre de la clase puede ser un símbolo
+    m1(){
+      // El nombre del método puede ser un símbolo
+      print("Dentro de m1");
+    }
+    m2(){
+      print("Dentro de m2");
+    }
+    m3(){
+      print("Dentro de m3");
+    }
+  }
+
+#+END_SRC 
+
+El siguiente código carga la biblioteca *Foo.dart* y busca la clase Foo, con la ayuda del tipo Symbol. Desde que tenemos la Reflección el metadato desde la biblioteca anterior el código importa la biblioteca *dart:mirrors*. 
+
+*FooSymbol.dart* 
+
+#+BEGIN_SRC C
+  import 'dart:core';
+  import 'dart:mirrors';
+  import 'Foo.dart';
+
+  main(){
+    Symbol lib = new Symbol("foo_lib");
+    // nombre de la biblioteca guardado como un símbolo
+
+    Symbol clsToSearch = new Symbol("Foo");
+    // nombre de la clase guardada como un símbolo
+
+    if(checkIf_classAvailableInlibrary(lib, clsToSearch))
+      // buscando la clase Foo en la biblioteca foo_lib
+      print("clase encontrada..");
+  }
+
+  bool checkIf_classAvailableInlibrary(Symbol libraryName, Symbol className){
+    MirrorSystem mirrorSystem = currentMirrorSystem();
+    LibraryMirror libMirror = mirrorSystem.findLibrary (libraryName);
+
+    if (libMirror != null){
+      print("Biblioteca encontrada");
+      print("comprobando..detalles de clase");
+      print("La clase no encontrada es : ${libMirror.declarations.length}");
+      libMirror.declarations.forEach((s, d) => print(s));
+
+      if (libMirror.declarations.containsKey(className)) return true;
+      return false;
+    }
+  }
+
+#+END_SRC  
+
+Fijemonos que la línea libMirror.declarations.forEach((s, d) => print(s)); iterará a través de toda la declaración en la biblioteca en tiempo de ejecucion y mostrará la declaracíon como tipo de *Symbol*.
+
+Este código producirá el siguiente resultado
+
+#+BEGIN_SRC 
+Biblioteca encontrada
+comprobando..detalles de clase
+La clase no encontrada es : 1
+Symbol("Foo")
+clase encontrada.
+#+END_SRC
+
+Ejemplo: Mostrando el número de métodos instanciados de una clase 
+
+Vamos a considerar el mostrar el número de métodos instanciados en una clase. La clase predefinida *ClassMirror* nos ayudará a conseguir lo mismo. 
+
+#+BEGIN_SRC dart 
+  import 'dart:core';
+  import 'dart:mirrors';
+  import 'Foo.dart';
+
+  main(){
+    Symbol lib = new Symbol("foo_lib");
+    Symbol clsToSearch = new Symbol("Foo");
+    reflect_InstanceMethods (lib, clsToSearch);
+  }
+
+  void reflect_InstanceMethods (Symbol libraryName, Symbol className){
+    MirrorSystem mirrorSystem = currentMirrorSystem();
+    LibraryMirror libMirror = mirrorSystem.findLibrary (libraryName);
+
+    if (libMirror != null){
+      print("Biblioteca encontrada");
+      print("comprobando.. detalle de clase");
+      print("La clase no encontrada es: ${libMirror.declarations.length}");
+      libMirror.declarations.forEach((s, d) => print(s));
+
+      if (libMirror.declarations.containsKey(className)) print("clase encontrada");
+      ClassMirror classMirror = libMirror.declarations[className];
+
+      print("La instancia del método no encontrado es ${classMirror.instanceMembers.length}");
+     classMirror.instanceMembers.forEach((s, v) => print(s)); 
+    }
+  }
+#+END_SRC
+
+Este código producirá la siguiente salida - 
+
+#+BEGIN_SRC
+Biblioteca encontrada
+comprobando.. detalle de clase
+La clase no encontrada es: 1
+Symbol("Foo")
+clase encontrada
+La instancia del método no encontrado es 8
+Symbol("==")
+Symbol("hashCode")
+Symbol("toString")
+Symbol("noSuchMethod")
+Symbol("runtimeType")
+Symbol("m1")
+Symbol("m2")
+Symbol("m3")
+#+END_SRC
+
+** Convirtiendo Símbolos a cadenas de texto 
+
+Podemos convertir el nombre de un tipo como clase o biblioteca guardado en un símbolo a cadena de texto usando la clase *MirrorSystem*. El siguiente código muestra como podemos hacerlo. 
+
+#+BEGIN_SRC dart 
+  import 'dart:mirrors';
+  void main(){
+    Symbol lib = new Symbol("foo_lib");
+    String name_of_lib = MirrorSystem.getName(lib);
+
+    print(lib);
+    print(name_of_lib);
+  }
+#+END_SRC
+
+Esto producirá la siguiente salida - 
+
+#+BEGIN_SRC
+Symbol("foo_lib")
+foo_lib
+#+END_SRC
+
+
+
 
 * Clases 
 
