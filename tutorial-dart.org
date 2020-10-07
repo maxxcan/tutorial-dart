@@ -1466,6 +1466,67 @@ Esto producirá la salida -
 
 
 
+* Enumeración 
+
+Una enumeración es usada para definir valores constantes nombrados. Un tipo enumerado es declarado usando la palabra clave *enum*. 
+
+** Sintaxis 
+
+#+BEGIN_SRC dart 
+  enum nombre_enum {
+    lista enumerada
+  }
+#+END_SRC
+
+Donde, 
+
++ El nombre_enum especifica el nombre del tipo enumaración
++ La lista enumerada es una lista de Identificadores separados por comas.
+
+Cada uno de los símbolos en la lista de enumaración es un valor entero, uno mayor que el símbolo que lo precede. Por defecto, el valor del primer elemento es 0. 
+
+Por ejemplo 
+
+#+BEGIN_SRC dart 
+  enum Estado{
+    ninguno,
+    corriendo,
+    parado,
+    pausado
+  }
+#+END_SRC
+
+
+** Ejemplo 
+
+#+BEGIN_SRC dart 
+  enum Estado {
+    ninguno,
+    corriendo,
+    parado,
+    pausado
+  }
+
+  void main(){
+    print(Estado.values);
+    Estado.values.forEach((v) => print('Valores: $v, índice: ${v.index}'));
+    print('corriendo: ${Estado.corriendo}, ${Estado.corriendo.index}');
+    print('corriendo indice: ${Estado.values[1]}');
+  }
+#+END_SRC
+
+Esto producirá la siguiente salida - 
+
+#+BEGIN_SRC 
+Valores: Estado.ninguno, índice: 0
+Valores: Estado.corriendo, índice: 1
+Valores: Estado.parado, índice: 2
+Valores: Estado.pausado, índice: 3
+corriendo: Estado.corriendo, 1
+corriendo indice: Estado.corriendo
+#+END_SRC
+
+
 * Clases 
 
   Dart es un lenguaje orientado a objetos. Soporta características de programación orientada a objetos como clases, interfaces, etc. Una clase en terminos de OOP es un plano para crear objetos. Una clase encapsula datos para el objeto. Dart ofrece soporte para este concepto llamado *clase*. 
