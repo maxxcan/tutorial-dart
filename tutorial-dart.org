@@ -1346,6 +1346,123 @@ Symbol("foo_lib")
 foo_lib
 #+END_SRC
 
+* Runas 
+
+Las cadenas de texto son una secuencia de caracteres. Dart representa las cadenas de texto como una secuencia de unidades de Unicode UTF-16. Unicode es un formato que define un valor numérico único para cada letra, dígito y símbolo. 
+
+Desde que una cadena de text en Dart es una secuencia de unidades de código de UTF-16, los valores Unicode de 32-bit en una cadena son representados usando una sintaxis especial. Una *runa* es un entero representando un código Unicode. 
+
+La clase String de la biblioteca *dart:core* proporciona mecanismos para acceder a las *Runas*. A las runas se puede ser accedido de tres formas - 
+
++ Usando la función String.codeUnitAt()
++ Usando la propiedad String.codeUnits 
++ Usando la propiedad String.runes 
+
+** Función String.codeUnitAt() 
+
+Las unidades de código de una cadena de texto pueden ser accedidas a través de sus índices. Devolviendo el código de 16-bit UTF-16 
+
+Sintaxis 
+
+#+BEGIN_SRC dart 
+String.codeUnitAt(int index);
+#+END_SRC
+
+Ejemplo 
+
+#+BEGIN_SRC dart
+  import 'dart:core';
+  void main(){
+    f1();
+  }
+  f1(){
+    String x = 'Runes';
+    print(x.codeUnitAt(0));
+  }
+#+END_SRC
+
+
+Lo que producirá 
+
+: 82 
+
+** La propiedad String.codeUnits 
+
+Esta propiedad Devuelve un no modificable lista de unidades de código UTF-16 de la cadena de texto especificada 
+
+Sintaxis 
+
+#+BEGIN_SRC dart 
+String. codeUnits;
+#+END_SRC
+
+Ejemplo 
+
+#+BEGIN_SRC dart 
+  import 'dart:core';
+  void main(){
+    f1();
+  }
+  f1(){
+    String x = 'Runes';
+    print(x.codeUnits);
+  }
+#+END_SRC
+
+Lo que producirá la siguiente salida 
+
+: [82, 117, 110, 101, 115]
+
+** Propiedad String.runes 
+
+Esta propiedad devuelve un repetible code-points de Unicode de este *string.Runes* extiende repetidamente.
+
+Sintaxis 
+
+#+BEGIN_SRC dart 
+String.runes 
+#+END_SRC
+
+Ejemplo - 
+
+#+BEGIN_SRC C
+  void main(){
+    "A string".runes.forEach((int rune){
+	var character=new String.fromCharCode(rune);
+	print(character);
+      });
+  }
+#+END_SRC
+
+
+Cuyo resultado será la siguiente salida - 
+
+#+BEGIN_SRC dart 
+A
+ 
+s
+t
+r
+i
+n
+g
+#+END_SRC
+
+Los puntos de código Unicode son normalmente expresados como *\uXXXX* donde XXXX es un valor hexadecimal de 4 dígitos. Para especificar más o menos de 4 dígitos hexadecimales, el valor se pone entre llaves. Se puede usar el constructor de la clase Rune de la biblioteca dart:core para lo mismo. 
+
+Ejemplo - 
+
+#+BEGIN_SRC dart 
+  main(){
+    Runes input = new Runes(' \u{1f605} ');
+    print(new String.fromCharCodes(input));
+  }
+#+END_SRC
+
+Esto producirá la salida - 
+
+: 😅
+
 
 
 
