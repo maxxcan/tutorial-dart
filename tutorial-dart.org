@@ -1526,6 +1526,84 @@ corriendo: Estado.corriendo, 1
 corriendo indice: Estado.corriendo
 #+END_SRC
 
+* Funciones 
+
+Las funciones son bloques de código legibles, mantenibles y reutilizables. Una función es un conjunto de declaraciones que ejecutan una tarea específica. Las funciones organizan el programa en bloques lógicos de código. Una vez definidos, las funciones pueden ser llamadas para acceder a su código. Esto hace el código reutilizable. Encima, las funciones hacen fácil leer y mantener el código del programa. 
+
+Una declaración de función le dice al compilador sobre el nombre de la función, devueve un tipo, y parámetros. Una definición de función proporciona el verdadero cuerpo de la función 
+
+| Nº | Funciones                | Descripción                                                      |
+|----+--------------------------+------------------------------------------------------------------|
+|  1 | Definiendo una función   | Especifica qué y cómo una tarea específica será realizada        |
+|  2 | Llamando a una función   | Una función debe ser llamada para ser ejecutada                  |
+|  3 | Devolviendo una función  | Las funciones pueden devolver un valor                           |
+|  4 | Funciones parametrizadas | Los parámetros son mecanismos para pasar valores a las funciones |
+
+
+** Parámetros opcionales 
+
+Los parámetros opcionales pueden ser usados cuando los arguementos no son obligatoriamente necesarios para la ejecución de una función. Un parámetro puede ser marcado como opcional por añaduría de una marca de interrogación en su nombre. El parámetro opciconal pude ser establecido  como el último argumento de una función. 
+
+Tenemos tres tipo de parámetros opcionales en Dart. 
+
+| Nº | Parámetro                                | Descripción                                                                   |
+|----+------------------------------------------+-------------------------------------------------------------------------------|
+|  1 | Parámetro opcional posicional            | Para hacer esto se urá corchetes []                                           |
+|  2 | Parámetro opcional nombrado              | El nombre el parámetro debe ser especificado. Se usan las llaves para esto {} |
+|  3 | Parámetro opcional con valor por defecto | Tienen un valor por defecto pero también se le puede pasar valores explícitos |
+
+*** Ejemplos 
+
+** Funciones recursivas en Dart 
+
+La recursión es una técnica para iterarar sobre una operación donde una función se llama así misma repetidamente hasta llegar a un resultado. La recursión es lo mejor aplicado cuando necesitamos llamar a la misma función repetidamente con diferentes parámetros dentro de un bucle. 
+
+Ejemplo 
+
+#+BEGIN_SRC dart 
+  void main(){
+    print(factorial (6));
+  }
+
+  factorial(number){
+    if (number <= 0){
+      return 1;
+    } else {
+      return (number * factorial(number - 1));
+    }
+  }
+#+END_SRC
+
+Esto producirá la siguiente salida - 
+
+: 720
+
+** Funciones Lambda 
+
+Las fuciones Lambda son un mecanismo conciso para representar funciones. Esas funciones también son llamadas como funciones Flecha. 
+
+Sintaxid 
+
+: [tipo_devuelto] nombre_funcion(parametros)=>expresion; 
+
+Ejemplo 
+
+#+BEGIN_SRC dart 
+  void main(){
+    printMsg();
+    print(test());
+  }
+
+  printMsg()=>
+  print("Hello");
+
+  int test() =>123;
+#+END_SRC
+
+Esto producirá la siguiente salida - 
+
+: hello 123
+
 
 * Clases 
 
