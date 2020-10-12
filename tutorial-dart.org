@@ -1604,6 +1604,85 @@ Esto producirá la siguiente salida -
 
 : hello 123
 
+* Interfaces 
+
+Una *interfaz* define la sintaxis que cualquier entidad debe cumplir. Las interfaces definen un conjunto de métodos disponibles para un objeto. Dart no tiene una sintaxxis para declarar interfaces. La declaración de clases son en sí mismas interfaces en Dart. 
+
+Las *clases* deberían usar la palabra clave *implements* para ser capaces de usar una interfaz. Es obligatorio para implmenentar una clase proporcionar una implementación concreta de todas las funciones de la interfaz implementada. En otras palabras, una clase debe redefinir cada función en la interfaz que desee implementar. 
+
+Syntáxis. Implementando una Interfaz 
+
+: class identificador implements nombre_interfaz
+
+Ejemplo 
+
+En el siguiente programa, vamos a declarar un clase *Printer*. La clase *ConsolePrinter* implementa la declaración de interfaz implícita para la clase *Printer*. La fución *main* crea un objeto de la clase *ConsolePrinter* usando la palabra clave *new*. Este objeto es usado para invocar la función *print_data* definido en la clase *ConsolePrinter*. 
+
+#+BEGIN_SRC dart 
+  void main(){
+    ConsolePrinter cp= new ConsolePrinter();
+    cp.print_data();
+  }
+
+  class Printer {
+    void print_data(){
+      print("_____________Printing Data____________");
+    }
+  }
+
+  class ConsolePrinter implements Printer {
+    void print_data(){
+      print("_____________Printing to Console___________");
+    }
+  }
+
+#+END_SRC
+
+
+Esto  producirá la siguiente salida - 
+
+: _______________Printing to Console___________
+
+
+** Implementando Múltiples Interfaces 
+
+Una clase puede implementar múltiples interfaces. La interfaces son separadas por una coma. La *sintáxis* es la siguiente - 
+
+: class identificador implements interface-1,interface-2,interface-3 ...
+
+
+El siguiente *ejemplo* muestra como implementar múltiples interfaces en Dart. 
+
+#+BEGIN_SRC dart 
+  void main(){
+    Calculator c = new Calculator();
+    print("The gross total : ${c.ret_tot(}");
+    print("Discount :${c.ret_dis}");
+  }
+
+  class Calculate_Total {
+    int ret_tot() {}
+  }
+
+  class Calculate_Discount {
+    int ret_dis(){}
+  }
+
+  class Calculator implements Calculate_Total,Calculate_Discount{
+    int ret_tot(){
+      return 1000;
+    }
+    int ret_dis(){
+      return 50;
+    }
+  }
+#+END_SRC
+
+Esto producirá la siguiente salida - 
+
+: The gross total: 1000
+: Discount: 50
+
 
 * Clases 
 
